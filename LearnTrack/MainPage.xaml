@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="LearnTrack.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#202020">
+
+    <Grid ColumnDefinitions="100,*">
+        <!--#region Navigation-->
+        <VerticalStackLayout
+            Grid.Column="0"
+            Padding="20"
+            BackgroundColor="Black"
+            Spacing="20">
+            <Button
+                Grid.Column="0"
+                Padding="0"
+                BackgroundColor="#8F00FF"
+                CornerRadius="50"
+                FontFamily="Icons"
+                FontSize="25"
+                HeightRequest="40"
+                Text="&#xE802;"
+                TextColor="Black"
+                WidthRequest="40" />
+            <Frame
+                Padding="0,10,0,130"
+                BackgroundColor="#481B6B"
+                CornerRadius="30"
+                WidthRequest="70">
+                <VerticalStackLayout Spacing="10">
+                    <Button
+                        Padding="0"
+                        BackgroundColor="#8F00FF"
+                        CornerRadius="50"
+                        FontFamily="Icons"
+                        FontSize="20"
+                        HeightRequest="30"
+                        Opacity="10"
+                        Text="&#xF274;"
+                        TextColor="Black"
+                        WidthRequest="30" />
+                    <Button
+                        Padding="0"
+                        BackgroundColor="#481B6B"
+                        BorderWidth="2"
+                        CornerRadius="50"
+                        FontFamily="Icons"
+                        FontSize="20"
+                        HeightRequest="30"
+                        Text="&#xF0EB;"
+                        TextColor="White"
+                        WidthRequest="30" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+        <!--#endregion-->
+
+        <!--#region Content-->
+        <Grid
+            Grid.Column="1"
+            ColumnDefinitions="500,*,*"
+            RowDefinitions="250,.7*">
+            <Frame Margin="30,30,30,0" CornerRadius="30">
+                <Frame.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStopCollection>
+                            <GradientStop Offset="0.0" Color="#8F00FF" />
+                            <GradientStop Offset="0.3" Color="#8F00FF" />
+                            <!--<GradientStop Offset="1" Color="#009974" />-->
+                            <GradientStop Offset="1" Color="#00A3FF" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Frame.Background>
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="Witaj Paweł!"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </Frame>
+
+            <Frame
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="0,30,30,0"
+                BackgroundColor="#202020"
+                BorderColor="#202020">
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="15">
+                        <Button
+                            Padding="0"
+                            BackgroundColor="#202020"
+                            BorderWidth="2"
+                            CornerRadius="50"
+                            FontFamily="Icons"
+                            FontSize="20"
+                            HeightRequest="30"
+                            Opacity="10"
+                            Text="&#xF274;"
+                            TextColor="#8F00FF"
+                            WidthRequest="30" />
+                        <Label Text="Ostatnie 7 dni" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <!--<BoxView
+                        Margin="0,0,0,20"
+                        BackgroundColor="#3C3C3C"
+                        HeightRequest="1"
+                        HorizontalOptions="Start"
+                        WidthRequest="200" />-->
+                    <Grid
+                        Margin="0,30,0,30"
+                        Padding="10"
+                        ColumnDefinitions="30,30,30,30,30,30,30"
+                        HorizontalOptions="Start"
+                        RowDefinitions="30,30"
+                        VerticalOptions="Start">
+                        <Label
+                            Grid.Column="0"
+                            HorizontalTextAlignment="Center"
+                            Text="Pon" />
+                        <Label
+                            Grid.Column="1"
+                            HorizontalTextAlignment="Center"
+                            Text="Wt" />
+                        <Label
+                            Grid.Column="2"
+                            HorizontalTextAlignment="Center"
+                            Text="Śr" />
+                        <Label
+                            Grid.Column="3"
+                            HorizontalTextAlignment="Center"
+                            Text="Czw" />
+                        <Label
+                            Grid.Column="4"
+                            HorizontalTextAlignment="Center"
+                            Text="Pt" />
+                        <Label
+                            Grid.Column="5"
+                            HorizontalTextAlignment="Center"
+                            Text="Sob" />
+                        <Label
+                            Grid.Column="6"
+                            HorizontalTextAlignment="Center"
+                            Text="Nie" />
+                        <CheckBox
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HeightRequest="1"
+                            IsChecked="True"
+                            WidthRequest="1"
+                            Color="#00A3FF" />
+                        <CheckBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HeightRequest="1"
+                            IsChecked="True"
+                            WidthRequest="1"
+                            Color="#00A3FF" />
+                        <CheckBox
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            HeightRequest="1"
+                            IsChecked="True"
+                            WidthRequest="1"
+                            Color="#00A3FF" />
+                        <CheckBox
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            HeightRequest="1"
+                            IsChecked="True"
+                            WidthRequest="1"
+                            Color="#00A3FF" />
+                        <CheckBox
+                            Grid.Row="1"
+                            Grid.Column="4"
+                            HeightRequest="1"
+                            IsChecked="True"
+                            WidthRequest="1"
+                            Color="#00A3FF" />
+                        <CheckBox
+                            Grid.Row="1"
+                            Grid.Column="5"
+                            HeightRequest="1"
+                            IsChecked="True"
+                            WidthRequest="1"
+                            Color="#00A3FF" />
+                        <CheckBox
+                            Grid.Row="1"
+                            Grid.Column="6"
+                            HeightRequest="1"
+                            IsChecked="True"
+                            WidthRequest="1"
+                            Color="#00A3FF" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="30"
+                BackgroundColor="#202020"
+                BorderColor="#3C3C3C"
+                CornerRadius="40">
+                <VerticalStackLayout Padding="10" Spacing="15">
+                    <HorizontalStackLayout Margin="0,0,0,0">
+                        <Button
+                            Margin="0,0,15,0"
+                            Padding="0"
+                            BackgroundColor="#202020"
+                            BorderWidth="2"
+                            CornerRadius="50"
+                            FontFamily="Icons"
+                            FontSize="20"
+                            HeightRequest="30"
+                            Text="&#xF0EB;"
+                            TextColor="#8F00FF"
+                            VerticalOptions="Center"
+                            WidthRequest="30" />
+                        <Label
+                            Text="Ostatnio przerabiane tematy"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                    <!--<BoxView
+                        Margin="0,0,0,40"
+                        BackgroundColor="#3C3C3C"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand" />-->
+
+                    <Grid ColumnDefinitions=".6*,.4*" RowDefinitions="*,*,*,*">
+                        <Button
+                            Grid.Column="0"
+                            BackgroundColor="#202020"
+                            BorderColor="#8F00FF"
+                            BorderWidth="2"
+                            Clicked="Button_Clicked"
+                            CornerRadius="20"
+                            FontSize="25"
+                            HeightRequest="60"
+                            HorizontalOptions="Start"
+                            Text="C#"
+                            TextColor="#8F00FF"
+                            WidthRequest="500" />
+                        <Label
+                            Grid.Column="1"
+                            Margin="30,0,0,0"
+                            Text="30.08.2024"
+                            TextColor="#3C3C3C"
+                            VerticalOptions="Center" />
+                    </Grid>
+                    <Button
+                        BackgroundColor="#202020"
+                        BorderColor="#8F00FF"
+                        BorderWidth="2"
+                        Clicked="Button_Clicked"
+                        CornerRadius="20"
+                        FontSize="25"
+                        HeightRequest="60"
+                        HorizontalOptions="Start"
+                        Text="SQL"
+                        TextColor="#8F00FF"
+                        WidthRequest="500" />
+                    <Button
+                        BackgroundColor="#202020"
+                        BorderColor="#8F00FF"
+                        BorderWidth="2"
+                        Clicked="Button_Clicked"
+                        CornerRadius="20"
+                        FontSize="25"
+                        HeightRequest="60"
+                        HorizontalOptions="Start"
+                        Text=".NET"
+                        TextColor="#8F00FF"
+                        WidthRequest="500" />
+                    <!--<Frame
+                        BackgroundColor="#009974"
+                        CornerRadius="30"
+                        HeightRequest="80"
+                        HorizontalOptions="Start"
+                        WidthRequest="500">
+                        <Label
+                            FontSize="Large"
+                            Text="SQL"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center" />
+                    </Frame>
+                    <Frame
+                        BackgroundColor="#E7B511"
+                        CornerRadius="30"
+                        HeightRequest="80"
+                        HorizontalOptions="Start"
+                        WidthRequest="500">
+                        <Label
+                            FontSize="Large"
+                            Text=".NET"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center" />
+                    </Frame>-->
+
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+        <!--#endregion-->
+
+    </Grid>
+
+</ContentPage>
