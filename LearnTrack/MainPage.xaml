@@ -26,12 +26,14 @@
             <Frame
                 Padding="0,10,0,130"
                 BackgroundColor="#481B6B"
+                BorderColor="#202020"
                 CornerRadius="30"
                 WidthRequest="70">
                 <VerticalStackLayout Spacing="10">
                     <Button
                         Padding="0"
                         BackgroundColor="#8F00FF"
+                        Clicked="CalendarPage_Clicked"
                         CornerRadius="50"
                         FontFamily="Icons"
                         FontSize="20"
@@ -95,6 +97,7 @@
                             Padding="0"
                             BackgroundColor="#202020"
                             BorderWidth="2"
+                            Clicked="CalendarPage_Clicked"
                             CornerRadius="50"
                             FontFamily="Icons"
                             FontSize="20"

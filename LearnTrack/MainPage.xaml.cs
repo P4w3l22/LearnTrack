@@ -1,17 +1,21 @@
-﻿namespace LearnTrack
+﻿
+namespace LearnTrack;
+
+public partial class MainPage : ContentPage
 {
-	public partial class MainPage : ContentPage
+
+	public MainPage()
 	{
-
-		public MainPage()
-		{
-			InitializeComponent();
-		}
-
-		private void Button_Clicked(object sender, EventArgs e)
-		{
-			DisplayAlert("Tytuł", "Test", "Ok");
-		}
+		InitializeComponent();
 	}
 
+	private void Button_Clicked(object sender, EventArgs e)
+	{
+		DisplayAlert("Tytuł", "Test", "Ok");
+	}
+
+	private void CalendarPage_Clicked(object sender, EventArgs e)
+	{
+		Navigation.PushAsync(new CalendarPage());
+	}
 }
