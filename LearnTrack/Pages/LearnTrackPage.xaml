@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:LearnTrack.Converters"
     Title="LearnTrackPage"
+    BackgroundColor="{StaticResource BackgroundBlackColor}"
     BarTextColor="{StaticResource PrimaryColor}"
     SelectedTabColor="{StaticResource PrimaryColor}">
 
@@ -14,11 +15,189 @@
 
     <ContentPage Title="C#" Padding="40">
 
-        <Grid ColumnDefinitions="*,*">
+        <Grid ColumnDefinitions=".6*,.4*">
 
-            <Grid Grid.Column="0" ColumnDefinitions=".1*,.8*,.1*">
+            <Grid Grid.Column="0">
+                <!--<Label Text="Wykres ilości notatek do tematu" />-->
+                <Frame
+                    Padding="20,0,20,20"
+                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                    BorderColor="{StaticResource SecondaryGrayColor}"
+                    CornerRadius="30">
+                    <Grid RowDefinitions=".1*,1,.8*">
+                        <Grid Grid.Row="0" ColumnDefinitions=".7*,.1*,.2*">
+                            <Label
+                                Grid.Column="0"
+                                Padding="5"
+                                FontSize="Large"
+                                Text="Metody asynchroniczne"
+                                TextColor="{StaticResource PrimaryColor}"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="20"
+                                Text="2 wpisy"
+                                VerticalOptions="Center" />
+                            <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End">
+                                <Button
+                                    Grid.Column="2"
+                                    Margin="0,0,9,0"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                    BorderColor="red"
+                                    BorderWidth="2"
+                                    CornerRadius="16"
+                                    FontSize="30"
+                                    HeightRequest="20"
+                                    HorizontalOptions="End"
+                                    Text="-"
+                                    TextColor="Red"
+                                    WidthRequest="20" />
+                                <Button
+                                    Grid.Column="2"
+                                    Margin="0,0,9,0"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                    BorderColor="Orange"
+                                    BorderWidth="2"
+                                    CornerRadius="16"
+                                    FontSize="25"
+                                    HeightRequest="20"
+                                    HorizontalOptions="End"
+                                    Text="/"
+                                    TextColor="Orange"
+                                    WidthRequest="20" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <BoxView
+                            Grid.Row="1"
+                            HeightRequest="1"
+                            Color="{StaticResource SecondaryGrayColor}" />
+                        <ScrollView
+                            Grid.Row="2"
+                            Margin="0,30,0,30"
+                            Orientation="Vertical">
+                            <VerticalStackLayout Spacing="18">
+
+                                <Frame
+                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                    BorderColor="{StaticResource SecondaryGrayColor}"
+                                    CornerRadius="20">
+                                    <Grid ColumnDefinitions=".7*,.15*,.15*">
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="Realizuje się poprzez dodanie słowa async do definicji metodyRealizuje się poprzez dodanie słowa async do definicji metody"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Grid.Column="1"
+                                            HorizontalOptions="Center"
+                                            Text="03.09.2024"
+                                            VerticalOptions="Center" />
+                                        <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End">
+                                            <Button
+                                                Grid.Column="2"
+                                                Margin="0,0,9,0"
+                                                Padding="0"
+                                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                                BorderColor="red"
+                                                BorderWidth="2"
+                                                CornerRadius="16"
+                                                FontSize="30"
+                                                HeightRequest="20"
+                                                HorizontalOptions="End"
+                                                Text="-"
+                                                TextColor="Red"
+                                                WidthRequest="20" />
+                                            <Button
+                                                Grid.Column="2"
+                                                Margin="0,0,9,0"
+                                                Padding="0"
+                                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                                BorderColor="Orange"
+                                                BorderWidth="2"
+                                                CornerRadius="16"
+                                                FontSize="25"
+                                                HeightRequest="20"
+                                                HorizontalOptions="End"
+                                                Text="/"
+                                                TextColor="Orange"
+                                                WidthRequest="20" />
+                                        </HorizontalStackLayout>
+                                    </Grid>
+
+                                </Frame>
+
+                                <Frame
+                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                    BorderColor="{StaticResource SecondaryGrayColor}"
+                                    CornerRadius="20">
+                                    <Grid ColumnDefinitions=".7*,.15*,.15*">
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="Pozwalają na wykonywanie akcji równolegle do czasu działania programu"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Grid.Column="1"
+                                            HorizontalOptions="Center"
+                                            Text="01.09.2024"
+                                            VerticalOptions="Center" />
+                                        <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End">
+                                            <Button
+                                                Grid.Column="2"
+                                                Margin="0,0,9,0"
+                                                Padding="0"
+                                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                                BorderColor="Red"
+                                                BorderWidth="2"
+                                                CornerRadius="16"
+                                                FontSize="30"
+                                                HeightRequest="20"
+                                                HorizontalOptions="End"
+                                                Text="-"
+                                                TextColor="Red"
+                                                WidthRequest="20" />
+                                            <Button
+                                                Grid.Column="2"
+                                                Margin="0,0,9,0"
+                                                Padding="0"
+                                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                                BorderColor="Orange"
+                                                BorderWidth="2"
+                                                CornerRadius="16"
+                                                FontSize="25"
+                                                HeightRequest="20"
+                                                HorizontalOptions="End"
+                                                Text="/"
+                                                TextColor="Orange"
+                                                WidthRequest="20" />
+                                        </HorizontalStackLayout>
+                                    </Grid>
+
+                                </Frame>
+
+                                <Button
+                                    Grid.Column="2"
+                                    Margin="0,0,9,0"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                    BorderColor="{StaticResource PrimaryColor}"
+                                    BorderWidth="2"
+                                    CornerRadius="16"
+                                    FontSize="25"
+                                    HeightRequest="20"
+                                    HorizontalOptions="Center"
+                                    Text="+"
+                                    TextColor="{StaticResource PrimaryColor}"
+                                    WidthRequest="20" />
+                            </VerticalStackLayout>
+                        </ScrollView>
+                    </Grid>
+                </Frame>
+            </Grid>
+
+            <Grid Grid.Column="1" ColumnDefinitions=".1*,.8*,.1*">
                 <ScrollView Grid.Column="1">
-                    <StackLayout>
+                    <StackLayout Spacing="18">
                         <CollectionView ItemsSource="{Binding TopicList}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="7" />
@@ -33,46 +212,42 @@
                                         CornerRadius="20"
                                         MaximumHeightRequest="80"
                                         VerticalOptions="Start">
-                                        <Grid ColumnDefinitions=".6*,.2*,.2*">
-                                            <Button
-                                                Grid.Column="0"
-                                                BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                                CornerRadius="20"
-                                                FontSize="20"
-                                                HeightRequest="60"
-                                                HorizontalOptions="Start"
-                                                Text="{Binding Topic}"
-                                                TextColor="{StaticResource PrimaryColor}" />
-                                            <Label
+                                        <Button
+                                            Grid.Column="0"
+                                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                            CornerRadius="20"
+                                            FontSize="20"
+                                            HeightRequest="60"
+                                            HorizontalOptions="Start"
+                                            Text="{Binding Topic}"
+                                            TextColor="{StaticResource PrimaryColor}" />
+                                        <!--<Label
                                                 Grid.Column="1"
-                                                Text="{Binding Notes, Converter={StaticResource ListCountConverter}, StringFormat='Liczba wpisów: {0}'}"
+                                                Text="{Binding Notes, Converter={StaticResource ListCountConverter}, StringFormat='Wpisy: {0}'}"
                                                 TextColor="White"
-                                                VerticalOptions="Center" />
-                                            <Button
-                                                Grid.Column="2"
-                                                Margin="0,0,9,0"
-                                                Padding="0"
-                                                BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                                BorderColor="{StaticResource PrimaryColor}"
-                                                BorderWidth="2"
-                                                CornerRadius="16"
-                                                FontSize="25"
-                                                HeightRequest="20"
-                                                HorizontalOptions="End"
-                                                Text="+"
-                                                TextColor="{StaticResource PrimaryColor}"
-                                                WidthRequest="20" />
-                                        </Grid>
+                                                VerticalOptions="Center" />-->
                                     </Frame>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
+                        <Button
+                            Grid.Column="2"
+                            Margin="0,0,9,0"
+                            Padding="0"
+                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                            BorderColor="{StaticResource PrimaryColor}"
+                            BorderWidth="2"
+                            CornerRadius="16"
+                            FontSize="25"
+                            HeightRequest="20"
+                            HorizontalOptions="Center"
+                            Text="+"
+                            TextColor="{StaticResource PrimaryColor}"
+                            WidthRequest="20" />
                     </StackLayout>
                 </ScrollView>
             </Grid>
-            <Grid Grid.Column="1">
-                <Label Text="Wykres ilości notatek do tematu" />
-            </Grid>
+
         </Grid>
 
 
