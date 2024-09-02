@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="LearnTrack.Pages.LearnTrackPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:LearnTrack.Converters"
+    Title="LearnTrackPage"
+    BarTextColor="{StaticResource PrimaryColor}"
+    SelectedTabColor="{StaticResource PrimaryColor}">
+
+    <TabbedPage.Resources>
+        <converters:ListCountConverter x:Key="ListCountConverter" />
+    </TabbedPage.Resources>
+
+    <ContentPage Title="C#" Padding="40">
+
+        <Grid ColumnDefinitions="*,*">
+
+            <Grid Grid.Column="0" ColumnDefinitions=".1*,.8*,.1*">
+                <ScrollView Grid.Column="1">
+                    <StackLayout>
+                        <CollectionView ItemsSource="{Binding TopicList}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="7" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Margin="0,0,0,10"
+                                        Padding="0"
+                                        BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                        BorderColor="{StaticResource SecondaryGrayColor}"
+                                        CornerRadius="20"
+                                        MaximumHeightRequest="80"
+                                        VerticalOptions="Start">
+                                        <Grid ColumnDefinitions=".6*,.2*,.2*">
+                                            <Button
+                                                Grid.Column="0"
+                                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                                CornerRadius="20"
+                                                FontSize="20"
+                                                HeightRequest="60"
+                                                HorizontalOptions="Start"
+                                                Text="{Binding Topic}"
+                                                TextColor="{StaticResource PrimaryColor}" />
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="{Binding Notes, Converter={StaticResource ListCountConverter}}"
+                                                TextColor="{StaticResource SecondaryGrayColor}"
+                                                VerticalOptions="Center" />
+                                            <Button
+                                                Grid.Column="2"
+                                                Margin="0,0,9,0"
+                                                Padding="0"
+                                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                                BorderColor="{StaticResource PrimaryColor}"
+                                                BorderWidth="2"
+                                                CornerRadius="16"
+                                                FontSize="25"
+                                                HeightRequest="20"
+                                                HorizontalOptions="End"
+                                                Text="+"
+                                                TextColor="{StaticResource PrimaryColor}"
+                                                WidthRequest="20" />
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+
+            <!--<Frame
+                BackgroundColor="#202020"
+                BorderColor="#3C3C3C"
+                CornerRadius="30">
+                <Label Text="Tematy" />
+            </Frame>-->
+        </Grid>
+
+
+    </ContentPage>
+    <ContentPage Title="SQL" />
+    <ContentPage Title=".NET">
+        <Label Text=".NET" />
+    </ContentPage>
+</TabbedPage>

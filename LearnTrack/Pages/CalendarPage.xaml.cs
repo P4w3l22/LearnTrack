@@ -1,7 +1,7 @@
 using LearnTrack.Models;
 using LearnTrack.ViewModels;
 
-namespace LearnTrack;
+namespace LearnTrack.Pages;
 
 public partial class CalendarPage : ContentPage
 {

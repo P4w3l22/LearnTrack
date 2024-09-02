@@ -1,6 +1,7 @@
 ﻿using LearnTrack.Models;
 using PropertyChanged;
 using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace LearnTrack.ViewModels;
 
@@ -19,6 +20,7 @@ class CalendarViewModel
     };
     public List<NoteModel> Notes { get; set; }
     public string ActualDate { get; set; }
+    public NoteModel ActualDateNotes { get; set; }
 
 
 
@@ -48,6 +50,11 @@ class CalendarViewModel
                 RowId = (i-1)/7
             });
         }
+    }
+
+    private void SetActualDateNotes()
+    {
+
     }
 
     private void SetNotes()

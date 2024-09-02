@@ -1,5 +1,5 @@
 ﻿
-namespace LearnTrack;
+namespace LearnTrack.Pages;
 
 public partial class MainPage : ContentPage
 {
@@ -18,4 +18,9 @@ public partial class MainPage : ContentPage
 	{
 		Navigation.PushAsync(new CalendarPage());
 	}
+
+	private void LearnTrack_Clicked(object sender, EventArgs e)
+	{
+		Navigation.PushAsync(new LearnTrackPage());
+    }
 }
