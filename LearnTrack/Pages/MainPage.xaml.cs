@@ -23,4 +23,9 @@ public partial class MainPage : ContentPage
 	{
 		Navigation.PushAsync(new LearnTrackPage());
     }
+
+	private void GetSubjects()
+	{
+
+	}
 }

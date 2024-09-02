@@ -45,8 +45,8 @@
                                                 TextColor="{StaticResource PrimaryColor}" />
                                             <Label
                                                 Grid.Column="1"
-                                                Text="{Binding Notes, Converter={StaticResource ListCountConverter}}"
-                                                TextColor="{StaticResource SecondaryGrayColor}"
+                                                Text="{Binding Notes, Converter={StaticResource ListCountConverter}, StringFormat='Liczba wpisów: {0}'}"
+                                                TextColor="White"
                                                 VerticalOptions="Center" />
                                             <Button
                                                 Grid.Column="2"
@@ -70,13 +70,9 @@
                     </StackLayout>
                 </ScrollView>
             </Grid>
-
-            <!--<Frame
-                BackgroundColor="#202020"
-                BorderColor="#3C3C3C"
-                CornerRadius="30">
-                <Label Text="Tematy" />
-            </Frame>-->
+            <Grid Grid.Column="1">
+                <Label Text="Wykres ilości notatek do tematu" />
+            </Grid>
         </Grid>
 
 

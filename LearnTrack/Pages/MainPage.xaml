@@ -70,7 +70,6 @@
                 <Frame.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStopCollection>
-                            <GradientStop Offset="0.0" Color="{StaticResource PrimaryColor}" />
                             <GradientStop Offset="0.3" Color="{StaticResource PrimaryColor}" />
                             <!--<GradientStop Offset="1" Color="#009974" />-->
                             <GradientStop Offset="1" Color="#00A3FF" />
@@ -107,7 +106,7 @@
                             Text="&#xF274;"
                             TextColor="{StaticResource PrimaryColor}"
                             WidthRequest="30" />
-                        <Label Text="Ostatnie 7 dni" VerticalOptions="Center" />
+                        <Label Text="Aktywność (ostatnie 7 dni)" VerticalOptions="Center" />
                     </HorizontalStackLayout>
                     <Grid
                         Margin="0,30,0,30"
@@ -144,55 +143,62 @@
                             Grid.Column="6"
                             HorizontalTextAlignment="Center"
                             Text="Nie" />
-                        <CheckBox
+                        <Frame
                             Grid.Row="1"
                             Grid.Column="0"
-                            HeightRequest="1"
-                            IsChecked="True"
-                            WidthRequest="1"
-                            Color="{StaticResource PrimaryColor}" />
-                        <CheckBox
+                            BackgroundColor="{StaticResource PrimaryColor}"
+                            BorderColor="{StaticResource PrimaryColor}"
+                            CornerRadius="3"
+                            HeightRequest="20"
+                            WidthRequest="20" />
+                        <Frame
                             Grid.Row="1"
                             Grid.Column="1"
-                            HeightRequest="1"
-                            IsChecked="True"
-                            WidthRequest="1"
-                            Color="{StaticResource PrimaryColor}" />
-                        <CheckBox
+                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                            BorderColor="{StaticResource PrimaryColor}"
+                            CornerRadius="3"
+                            HeightRequest="20"
+                            WidthRequest="20" />
+                        <Frame
                             Grid.Row="1"
                             Grid.Column="2"
-                            HeightRequest="1"
-                            IsChecked="True"
-                            WidthRequest="1"
-                            Color="{StaticResource PrimaryColor}" />
-                        <CheckBox
+                            BackgroundColor="{StaticResource PrimaryColor}"
+                            BorderColor="{StaticResource PrimaryColor}"
+                            CornerRadius="3"
+                            HeightRequest="20"
+                            WidthRequest="20" />
+                        <Frame
                             Grid.Row="1"
                             Grid.Column="3"
-                            HeightRequest="1"
-                            IsChecked="True"
-                            WidthRequest="1"
-                            Color="{StaticResource PrimaryColor}" />
-                        <CheckBox
+                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                            BorderColor="{StaticResource PrimaryColor}"
+                            CornerRadius="3"
+                            HeightRequest="20"
+                            WidthRequest="20" />
+                        <Frame
                             Grid.Row="1"
                             Grid.Column="4"
-                            HeightRequest="1"
-                            IsChecked="True"
-                            WidthRequest="1"
-                            Color="{StaticResource PrimaryColor}" />
-                        <CheckBox
+                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                            BorderColor="{StaticResource PrimaryColor}"
+                            CornerRadius="3"
+                            HeightRequest="20"
+                            WidthRequest="20" />
+                        <Frame
                             Grid.Row="1"
                             Grid.Column="5"
-                            HeightRequest="1"
-                            IsChecked="True"
-                            WidthRequest="1"
-                            Color="{StaticResource PrimaryColor}" />
-                        <CheckBox
+                            BackgroundColor="{StaticResource PrimaryColor}"
+                            BorderColor="{StaticResource PrimaryColor}"
+                            CornerRadius="3"
+                            HeightRequest="20"
+                            WidthRequest="20" />
+                        <Frame
                             Grid.Row="1"
                             Grid.Column="6"
-                            HeightRequest="1"
-                            IsChecked="True"
-                            WidthRequest="1"
-                            Color="{StaticResource PrimaryColor}" />
+                            BackgroundColor="{StaticResource PrimaryColor}"
+                            BorderColor="{StaticResource PrimaryColor}"
+                            CornerRadius="3"
+                            HeightRequest="20"
+                            WidthRequest="20" />
                     </Grid>
                 </VerticalStackLayout>
             </Frame>

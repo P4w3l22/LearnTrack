@@ -17,6 +17,7 @@ public class LearnTrackViewModel
         {
             new TopicModel()
             {
+                SubjectId=0,
                 Topic="Metody asynchroniczne",
                 Notes=new List<ShortNote>()
                 {
@@ -27,6 +28,7 @@ public class LearnTrackViewModel
             },
 			new TopicModel()
 			{
+                SubjectId=0,
 				Topic="Pytania rekrutacyjne",
 				Notes=new List<ShortNote>()
 				{
