@@ -1,5 +1,5 @@
-using LearnTrack.Models;
-using LearnTrack.ViewModels;
+using LearnTrack.MVVM.Models;
+using LearnTrack.MVVM.ViewModels;
 
 namespace LearnTrack.Pages;
 

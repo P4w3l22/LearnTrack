@@ -1,9 +1,9 @@
-﻿using LearnTrack.Models;
+﻿using LearnTrack.MVVM.Models;
 using PropertyChanged;
 using System.Windows.Input;
 using System.Xml.Serialization;
 
-namespace LearnTrack.ViewModels;
+namespace LearnTrack.MVVM.ViewModels;
 
 [AddINotifyPropertyChangedInterface]
 class CalendarViewModel
@@ -24,7 +24,7 @@ class CalendarViewModel
 
 
 
-	public CalendarViewModel()
+    public CalendarViewModel()
     {
         SetCalendarCards();
         SetNotes();
@@ -42,12 +42,12 @@ class CalendarViewModel
 
         for (int i = 1; i <= 30; i++)
         {
-			CalendarCards.Add(new CalendarCardModel()
+            CalendarCards.Add(new CalendarCardModel()
             {
                 DayNumber = i,
                 NotesNumber = random.Next(0, 4),
-                ColumnId = (i-1)%7,
-                RowId = (i-1)/7
+                ColumnId = (i - 1) % 7,
+                RowId = (i - 1) / 7
             });
         }
     }
@@ -72,5 +72,5 @@ class CalendarViewModel
 
     public NoteModel GetNoteByTitle(string title) =>
         Notes.FirstOrDefault(x => x.Title == title);
-    
+
 }

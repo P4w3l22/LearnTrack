@@ -1,4 +1,4 @@
-using LearnTrack.ViewModels;
+using LearnTrack.MVVM.ViewModels;
 
 namespace LearnTrack.Pages;
 
