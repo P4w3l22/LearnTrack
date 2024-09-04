@@ -62,270 +62,294 @@
         <BoxView Grid.Column="1" Color="{StaticResource SecondaryGrayColor}" />
 
         <!--#region Content-->
-        <Grid
-            Grid.Column="2"
-            ColumnDefinitions="*,*"
-            RowDefinitions="250,*">
-            <Frame Margin="30,30,30,0" CornerRadius="30">
-                <Frame.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStopCollection>
-                            <GradientStop Offset="0.3" Color="{StaticResource PrimaryColor}" />
-                            <!--<GradientStop Offset="1" Color="#009974" />-->
-                            <GradientStop Offset="1" Color="#00A3FF" />
-                        </GradientStopCollection>
-                    </LinearGradientBrush>
-                </Frame.Background>
-                <Label
-                    FontSize="Large"
-                    HorizontalOptions="Center"
-                    Text="Witaj Paweł!"
-                    TextColor="White"
-                    VerticalOptions="Center" />
-            </Frame>
+        <ScrollView Grid.Column="2">
+            <FlexLayout
+                Padding="30"
+                AlignItems="Center"
+                JustifyContent="Center"
+                VerticalOptions="Center"
+                Wrap="Wrap">
 
-            <Frame
-                Grid.Row="0"
-                Grid.Column="1"
-                Grid.ColumnSpan="3"
-                Margin="0,30,30,0"
-                BackgroundColor="{StaticResource BackgroundBlackColor}"
-                BorderColor="{StaticResource BackgroundBlackColor}">
-                <VerticalStackLayout>
-                    <HorizontalStackLayout Spacing="15">
-                        <Button
-                            Padding="0"
-                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                            BorderWidth="2"
-                            Clicked="CalendarPage_Clicked"
-                            CornerRadius="50"
-                            FontFamily="Icons"
-                            FontSize="20"
-                            HeightRequest="30"
-                            Opacity="10"
-                            Text="&#xF274;"
-                            TextColor="{StaticResource PrimaryColor}"
-                            WidthRequest="30" />
-                        <Label Text="Aktywność (ostatnie 7 dni)" VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-                    <Grid
-                        Margin="0,30,0,30"
-                        Padding="10"
-                        ColumnDefinitions="30,30,30,30,30,30,30"
+                <!--#region GreetingPanel-->
+                <Frame
+                    CornerRadius="30"
+                    HeightRequest="260"
+                    MinimumWidthRequest="600">
+                    <Frame.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStopCollection>
+                                <GradientStop Offset="0.3" Color="{StaticResource PrimaryColor}" />
+                                <!--<GradientStop Offset="1" Color="#009974" />-->
+                                <GradientStop Offset="1" Color="#00A3FF" />
+                            </GradientStopCollection>
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                    <Label
+                        FontSize="Large"
                         HorizontalOptions="Center"
-                        RowDefinitions="30,30"
-                        VerticalOptions="Start">
-                        <Label
-                            Grid.Column="0"
-                            HorizontalTextAlignment="Center"
-                            Text="Pon" />
-                        <Label
-                            Grid.Column="1"
-                            HorizontalTextAlignment="Center"
-                            Text="Wt" />
-                        <Label
-                            Grid.Column="2"
-                            HorizontalTextAlignment="Center"
-                            Text="Śr" />
-                        <Label
-                            Grid.Column="3"
-                            HorizontalTextAlignment="Center"
-                            Text="Czw" />
-                        <Label
-                            Grid.Column="4"
-                            HorizontalTextAlignment="Center"
-                            Text="Pt" />
-                        <Label
-                            Grid.Column="5"
-                            HorizontalTextAlignment="Center"
-                            Text="Sob" />
-                        <Label
-                            Grid.Column="6"
-                            HorizontalTextAlignment="Center"
-                            Text="Nie" />
-                        <Frame
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            BackgroundColor="{StaticResource PrimaryColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="3"
-                            HeightRequest="20"
-                            WidthRequest="20" />
-                        <Frame
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="3"
-                            HeightRequest="20"
-                            WidthRequest="20" />
-                        <Frame
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            BackgroundColor="{StaticResource PrimaryColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="3"
-                            HeightRequest="20"
-                            WidthRequest="20" />
-                        <Frame
-                            Grid.Row="1"
-                            Grid.Column="3"
-                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="3"
-                            HeightRequest="20"
-                            WidthRequest="20" />
-                        <Frame
-                            Grid.Row="1"
-                            Grid.Column="4"
-                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="3"
-                            HeightRequest="20"
-                            WidthRequest="20" />
-                        <Frame
-                            Grid.Row="1"
-                            Grid.Column="5"
-                            BackgroundColor="{StaticResource PrimaryColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="3"
-                            HeightRequest="20"
-                            WidthRequest="20" />
-                        <Frame
-                            Grid.Row="1"
-                            Grid.Column="6"
-                            BackgroundColor="{StaticResource PrimaryColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="3"
-                            HeightRequest="20"
-                            WidthRequest="20" />
-                    </Grid>
-                </VerticalStackLayout>
-            </Frame>
+                        Text="Witaj Paweł!"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                </Frame>
+                <!--#endregion-->
 
-            <Frame
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Margin="30"
-                BackgroundColor="{StaticResource BackgroundBlackColor}"
-                BorderColor="{StaticResource SecondaryGrayColor}"
-                CornerRadius="40"
-                HorizontalOptions="Center"
-                WidthRequest="800">
-                <VerticalStackLayout Padding="10" Spacing="15">
-                    <HorizontalStackLayout Margin="0,0,0,0">
-                        <Button
-                            Margin="0,0,15,0"
-                            Padding="0"
-                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                            BorderWidth="2"
-                            Clicked="LearnTrack_Clicked"
-                            CornerRadius="50"
-                            FontFamily="Icons"
-                            FontSize="20"
-                            HeightRequest="30"
-                            Text="&#xF0EB;"
-                            TextColor="{StaticResource PrimaryColor}"
-                            VerticalOptions="Center"
-                            WidthRequest="30" />
-                        <Label
-                            Text="Ostatnio przerabiane tematy"
-                            VerticalOptions="Center"
-                            VerticalTextAlignment="Center" />
-                    </HorizontalStackLayout>
+                <!--#region ActivityPanel-->
+                <Frame
+                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                    BorderColor="{StaticResource BackgroundBlackColor}"
+                    HeightRequest="260"
+                    MinimumWidthRequest="600">
+                    <VerticalStackLayout>
+                        <HorizontalStackLayout Spacing="15">
+                            <Button
+                                Padding="0"
+                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                BorderWidth="2"
+                                Clicked="CalendarPage_Clicked"
+                                CornerRadius="50"
+                                FontFamily="Icons"
+                                FontSize="20"
+                                HeightRequest="30"
+                                Opacity="10"
+                                Text="&#xF274;"
+                                TextColor="{StaticResource PrimaryColor}"
+                                WidthRequest="30" />
+                            <Label Text="Aktywność (ostatnie 7 dni)" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Grid
+                            Margin="0,30,0,30"
+                            Padding="10"
+                            ColumnDefinitions="30,30,30,30,30,30,30"
+                            HorizontalOptions="Center"
+                            RowDefinitions="30,30"
+                            VerticalOptions="Start">
+                            <Label
+                                Grid.Column="0"
+                                HorizontalTextAlignment="Center"
+                                Text="Pon" />
+                            <Label
+                                Grid.Column="1"
+                                HorizontalTextAlignment="Center"
+                                Text="Wt" />
+                            <Label
+                                Grid.Column="2"
+                                HorizontalTextAlignment="Center"
+                                Text="Śr" />
+                            <Label
+                                Grid.Column="3"
+                                HorizontalTextAlignment="Center"
+                                Text="Czw" />
+                            <Label
+                                Grid.Column="4"
+                                HorizontalTextAlignment="Center"
+                                Text="Pt" />
+                            <Label
+                                Grid.Column="5"
+                                HorizontalTextAlignment="Center"
+                                Text="Sob" />
+                            <Label
+                                Grid.Column="6"
+                                HorizontalTextAlignment="Center"
+                                Text="Nie" />
+                            <Frame
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                BackgroundColor="{StaticResource PrimaryColor}"
+                                BorderColor="{StaticResource PrimaryColor}"
+                                CornerRadius="3"
+                                HeightRequest="20"
+                                WidthRequest="20" />
+                            <Frame
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                BorderColor="{StaticResource PrimaryColor}"
+                                CornerRadius="3"
+                                HeightRequest="20"
+                                WidthRequest="20" />
+                            <Frame
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                BackgroundColor="{StaticResource PrimaryColor}"
+                                BorderColor="{StaticResource PrimaryColor}"
+                                CornerRadius="3"
+                                HeightRequest="20"
+                                WidthRequest="20" />
+                            <Frame
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                BorderColor="{StaticResource PrimaryColor}"
+                                CornerRadius="3"
+                                HeightRequest="20"
+                                WidthRequest="20" />
+                            <Frame
+                                Grid.Row="1"
+                                Grid.Column="4"
+                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                BorderColor="{StaticResource PrimaryColor}"
+                                CornerRadius="3"
+                                HeightRequest="20"
+                                WidthRequest="20" />
+                            <Frame
+                                Grid.Row="1"
+                                Grid.Column="5"
+                                BackgroundColor="{StaticResource PrimaryColor}"
+                                BorderColor="{StaticResource PrimaryColor}"
+                                CornerRadius="3"
+                                HeightRequest="20"
+                                WidthRequest="20" />
+                            <Frame
+                                Grid.Row="1"
+                                Grid.Column="6"
+                                BackgroundColor="{StaticResource PrimaryColor}"
+                                BorderColor="{StaticResource PrimaryColor}"
+                                CornerRadius="3"
+                                HeightRequest="20"
+                                WidthRequest="20" />
 
-                    <Grid
-                        Margin="0,20,0,0"
-                        ColumnDefinitions=".2*,.6*,.2*"
-                        RowDefinitions="*,*,*,*">
-                        <Frame
-                            Grid.Column="1"
-                            Margin="0,0,0,10"
-                            Padding="0"
-                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="20">
-                            <Grid ColumnDefinitions=".8*,.2*">
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+                <!--#endregion-->
+
+                <!--#region LastSubjectsPanel-->
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="30"
+                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                    BorderColor="{StaticResource SecondaryGrayColor}"
+                    CornerRadius="40"
+                    HeightRequest="500"
+                    HorizontalOptions="Center"
+                    WidthRequest="600">
+                    <ScrollView>
+                        <VerticalStackLayout Padding="10" Spacing="15">
+                            <HorizontalStackLayout Margin="0,0,0,0">
                                 <Button
-                                    Grid.Column="0"
+                                    Margin="0,0,15,0"
+                                    Padding="0"
                                     BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                    Clicked="Button_Clicked"
-                                    CornerRadius="20"
-                                    FontSize="25"
-                                    HeightRequest="60"
-                                    HorizontalOptions="Start"
-                                    Text="C#"
-                                    TextColor="{StaticResource PrimaryColor}" />
+                                    BorderWidth="2"
+                                    Clicked="LearnTrack_Clicked"
+                                    CornerRadius="50"
+                                    FontFamily="Icons"
+                                    FontSize="20"
+                                    HeightRequest="30"
+                                    Text="&#xF0EB;"
+                                    TextColor="{StaticResource PrimaryColor}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="30" />
                                 <Label
-                                    HorizontalOptions="End"
-                                    Text="30.08.2024"
-                                    TextColor="{StaticResource SecondaryGrayColor}"
-                                    VerticalOptions="Center" />
-                            </Grid>
-                        </Frame>
+                                    Text="Ostatnio przerabiane tematy"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
 
-                        <Frame
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="0,0,0,10"
-                            Padding="0"
-                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="20">
-                            <Grid ColumnDefinitions=".8*,.2*">
-
-                                <Button
-                                    Grid.Column="0"
+                            <Grid
+                                Margin="0,20,0,0"
+                                ColumnDefinitions=".2*,.6*,.2*"
+                                RowDefinitions="*,*,*,*">
+                                <Frame
+                                    Grid.Column="1"
+                                    Margin="0,0,0,10"
+                                    Padding="0"
                                     BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                    Clicked="Button_Clicked"
-                                    CornerRadius="20"
-                                    FontSize="25"
-                                    HeightRequest="60"
-                                    HorizontalOptions="Start"
-                                    Text="SQL"
-                                    TextColor="{StaticResource PrimaryColor}" />
-                                <Label
-                                    Margin="30,0,0,0"
-                                    HorizontalOptions="End"
-                                    Text="14.08.2024"
-                                    TextColor="{StaticResource SecondaryGrayColor}"
-                                    VerticalOptions="Center" />
-                            </Grid>
-                        </Frame>
+                                    BorderColor="{StaticResource PrimaryColor}"
+                                    CornerRadius="20">
+                                    <Grid ColumnDefinitions=".8*,.2*">
+                                        <Button
+                                            Grid.Column="0"
+                                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                            Clicked="Button_Clicked"
+                                            CornerRadius="20"
+                                            FontSize="25"
+                                            HeightRequest="60"
+                                            HorizontalOptions="Start"
+                                            Text="C#"
+                                            TextColor="{StaticResource PrimaryColor}" />
+                                        <Label
+                                            HorizontalOptions="End"
+                                            Text="30.08.2024"
+                                            TextColor="{StaticResource SecondaryGrayColor}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </Frame>
 
-                        <Frame
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            Margin="0,0,0,10"
-                            Padding="0"
-                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                            BorderColor="{StaticResource PrimaryColor}"
-                            CornerRadius="20">
-                            <Grid ColumnDefinitions=".8*,.2*">
-                                <Button
+                                <Frame
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,0,0,10"
+                                    Padding="0"
                                     BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                    Clicked="Button_Clicked"
-                                    CornerRadius="20"
-                                    FontSize="25"
-                                    HeightRequest="60"
-                                    HorizontalOptions="Start"
-                                    Text=".NET"
-                                    TextColor="{StaticResource PrimaryColor}" />
-                                <Label
-                                    Margin="30,0,0,0"
-                                    HorizontalOptions="End"
-                                    Text="14.08.2024"
-                                    TextColor="{StaticResource SecondaryGrayColor}"
-                                    VerticalOptions="Center" />
+                                    BorderColor="{StaticResource PrimaryColor}"
+                                    CornerRadius="20">
+                                    <Grid ColumnDefinitions=".8*,.2*">
+
+                                        <Button
+                                            Grid.Column="0"
+                                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                            Clicked="Button_Clicked"
+                                            CornerRadius="20"
+                                            FontSize="25"
+                                            HeightRequest="60"
+                                            HorizontalOptions="Start"
+                                            Text="SQL"
+                                            TextColor="{StaticResource PrimaryColor}" />
+                                        <Label
+                                            Margin="30,0,0,0"
+                                            HorizontalOptions="End"
+                                            Text="14.08.2024"
+                                            TextColor="{StaticResource SecondaryGrayColor}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </Frame>
+
+                                <Frame
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Margin="0,0,0,10"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                    BorderColor="{StaticResource PrimaryColor}"
+                                    CornerRadius="20">
+                                    <Grid ColumnDefinitions=".8*,.2*">
+                                        <Button
+                                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                            Clicked="Button_Clicked"
+                                            CornerRadius="20"
+                                            FontSize="25"
+                                            HeightRequest="60"
+                                            HorizontalOptions="Start"
+                                            Text=".NET"
+                                            TextColor="{StaticResource PrimaryColor}" />
+                                        <Label
+                                            Margin="30,0,0,0"
+                                            HorizontalOptions="End"
+                                            Text="14.08.2024"
+                                            TextColor="{StaticResource SecondaryGrayColor}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </Frame>
+
                             </Grid>
-                        </Frame>
 
-                    </Grid>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </Frame>
+                <!--#endregion-->
 
-                </VerticalStackLayout>
-            </Frame>
-        </Grid>
+                <!--#region ChartPanel-->
+                <Label
+                    HeightRequest="500"
+                    HorizontalOptions="Center"
+                    MinimumWidthRequest="600"
+                    Text="Wykresy =&gt; Liczba dodanych notatek ; liczba dodanych tematów"
+                    VerticalOptions="Center" />
+                <!--#endregion-->
+            </FlexLayout>
+        </ScrollView>
         <!--#endregion-->
 
     </Grid>
