@@ -1,6 +1,7 @@
 ﻿using LearnTrack.MVVM.Models.Base;
 using LearnTrack.Repositories.IRepository;
 using SQLite;
+using SQLiteNetExtensions.Extensions;
 using System.Linq.Expressions;
 
 namespace LearnTrack.Repositories;
@@ -20,7 +21,8 @@ public class BaseRepository<T> : IBaseRepository<T> where T : TableData, new()
 	{
 		try
 		{
-			connection.Delete(item);
+			//connection.Delete(item);
+			connection.Delete(item, true);
 		}
 		catch (Exception ex)
 		{
@@ -106,5 +108,39 @@ public class BaseRepository<T> : IBaseRepository<T> where T : TableData, new()
 		{
 			StatusMessage = $"Error: {ex.Message}";
 		}
+	}
+
+	public void UpsertItemWithChildren(T item, bool recursive = false)
+	{
+		try
+		{
+			if (item.Id != 0)
+			{
+				connection.UpdateWithChildren(item);
+			}
+			else
+			{
+				connection.InsertWithChildren(item, true);
+			}
+
+		}
+		catch (Exception ex)
+		{
+			StatusMessage = $"Error: {ex.Message}";
+		}
+		//connection.InsertWithChildren(item, true);
+	}
+
+	public List<T> GetItemsWithChildren()
+	{
+		try
+		{
+			return connection.GetAllWithChildren<T>().ToList();
+		}
+		catch (Exception ex)
+		{
+			StatusMessage = $"Error: {ex.Message}";
+		}
+		return null;
 	}
 }

@@ -198,7 +198,7 @@
             <Grid Grid.Column="1" ColumnDefinitions=".1*,.8*,.1*">
                 <ScrollView Grid.Column="1">
                     <StackLayout Spacing="18">
-                        <CollectionView ItemsSource="{Binding TopicList}">
+                        <CollectionView ItemsSource="{Binding CurrentSubject.Topics}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="7" />
                             </CollectionView.ItemsLayout>
@@ -219,7 +219,7 @@
                                             FontSize="20"
                                             HeightRequest="60"
                                             HorizontalOptions="Start"
-                                            Text="{Binding Topic}"
+                                            Text="{Binding Name}"
                                             TextColor="{StaticResource PrimaryColor}" />
                                         <!--<Label
                                                 Grid.Column="1"
