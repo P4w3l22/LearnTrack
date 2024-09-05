@@ -1,5 +1,6 @@
 ﻿using LearnTrack.MVVM.Models.Base;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace LearnTrack.MVVM.Models;
 
@@ -8,4 +9,7 @@ public class Subject : TableData
 {
     [NotNull]
     public string Name { get; set; }
+
+    [OneToMany(CascadeOperations = CascadeOperation.All)]
+    public List<Topic> Topics { get; set; }
 }
