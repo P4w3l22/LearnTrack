@@ -16,17 +16,19 @@ public class LearnTrackViewModel
         new Command(() => UpsertTopicNote());
     public ICommand DeleteTopicNoteCommand =>
         new Command<object>((id) => DeleteTopicNote(id));
+    public ICommand ChangeTopicNoteCommand =>
+        new Command<object>((id) => ChangeCurrentTopicNote(id));
 
     public List<Subject> Subjects { get; set; }
     public Subject? CurrentSubject { get; set; }
 	public Topic? CurrentTopic { get; set; }
 
     public ICommand UpsertCommand =>
-        new Command(() => UpsertSubject());
+        new Command(() => SaveCurrentSubject());
     public ICommand DeleteCommand =>
-        new Command(() => DeleteSubject());
+        new Command(() => DeleteCurrentSubject());
 	public ICommand ChangeSubjectCommand =>
-		new Command<object>((id) => SetCurrentSubject(id));
+		new Command<object>((id) => ChangeCurrentSubject(id));
 	public ICommand ChangeTopicCommand =>
 		new Command<object>((id) => SetCurrentTopic(id));
 
@@ -37,12 +39,21 @@ public class LearnTrackViewModel
         SetCurrentTopic(CurrentSubject.Topics[0].Id);
 	}
 
-    private void UpsertTopicNote()
+    private void ChangeCurrentTopicNote(object id)
     {
-        CurrentTopicNote.TopicId = CurrentTopic.Id;
-		UpsertTopicNote2();
+        CurrentTopicNote = CurrentTopic.TopicNotes.FirstOrDefault(x => x.Id == (int)id);
+    }
+
+
+	private void UpsertTopicNote()
+    {
+        if (CurrentTopicNote.TopicId == 0)
+        {
+            CurrentTopicNote.TopicId = CurrentTopic.Id; 
+        }
+        SaveCurrentTopicNote();
         Refresh();
-        CurrentTopicNote = new();
+        CurrentTopicNote = new() { Date=DateTime.Now };
 	}
 
 	private void GetTopicNotes()
@@ -64,10 +75,15 @@ public class LearnTrackViewModel
         SetCurrentTopic(CurrentTopic.Id);
     }
 
+    private void ChangeCurrentSubject(object id)
+    {
+		SetCurrentSubject(id);
+		SetCurrentTopic(CurrentSubject.Topics[0].Id);
+	}
+
 	private void SetCurrentSubject(object id)
 	{
 		CurrentSubject = Subjects.FirstOrDefault(x => x.Id == (int)id);
-		SetCurrentTopic(CurrentSubject.Topics[0].Id);
 	}
 
 	private void SetCurrentTopic(object id)
@@ -98,17 +114,17 @@ public class LearnTrackViewModel
         }
 	}
 
-    private void UpsertSubject()
+    private void SaveCurrentSubject()
     {
         App.SubjectRepository.UpsertItemWithChildren(CurrentSubject);
     }
 
-    private void UpsertTopicNote2()
+    private void SaveCurrentTopicNote()
     {
         App.TopicNoteRepository.UpsertItemWithChildren(CurrentTopicNote);
     }
 
-	private void DeleteSubject()
+	private void DeleteCurrentSubject()
     {
         App.SubjectRepository.DeleteItem(CurrentSubject);
     }

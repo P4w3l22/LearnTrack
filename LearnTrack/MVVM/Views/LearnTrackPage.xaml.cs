@@ -18,6 +18,6 @@ public partial class LearnTrackPage : ContentPage
 
 	private void AddTopicNote_Clicked(object sender, EventArgs e)
 	{
-		this.ShowPopup(new AddTopicNotePopupPage(viewModel));
+		this.ShowPopup(new UpsertTopicNotePopupPage(viewModel));
 	}
 }
