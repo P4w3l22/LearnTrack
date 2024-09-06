@@ -7,9 +7,10 @@
     Title=""
     BackgroundColor="{StaticResource BackgroundBlackColor}">
 
-    <Grid RowDefinitions="50,1,*">
 
+    <Grid Grid.Row="1" RowDefinitions="50,1,*">
 
+        <!--#region SubjectsChoice-->
         <CollectionView Margin="20,0,20,0" ItemsSource="{Binding Subjects}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
@@ -23,21 +24,14 @@
                             CommandParameter="{Binding Id}"
                             Text="{Binding Name}"
                             TextColor="{StaticResource Gray200}" />
-                        <!--<Label Text="{Binding Name}" TextColor="{StaticResource Gray200}">
-                            <Label.Triggers>
-                                <DataTrigger
-                                    Binding="{Binding Id}"
-                                    TargetType="Label"
-                                    Value="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.CurrentSubject.Id}">
-                                    <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>-->
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <!--#endregion-->
+
         <BoxView Grid.Row="1" Margin="20,0,20,0" />
+
 
 
         <Grid
@@ -45,15 +39,16 @@
             Margin="30"
             ColumnDefinitions=".6*,.4*">
 
+            <!--#region TopicDetails-->
             <Grid Grid.Column="0">
-
                 <Frame
                     Padding="20,0,20,20"
                     BackgroundColor="{StaticResource BackgroundBlackColor}"
                     BorderColor="{StaticResource SecondaryGrayColor}"
                     CornerRadius="30">
-
                     <Grid RowDefinitions=".1*,1,.8*">
+
+                        <!--#region TopicHeader-->
                         <Grid Grid.Row="0" ColumnDefinitions=".7*,.1*,.2*">
                             <Label
                                 Grid.Column="0"
@@ -94,10 +89,14 @@
                                     WidthRequest="20" />
                             </HorizontalStackLayout>
                         </Grid>
+                        <!--#endregion-->
+
                         <BoxView
                             Grid.Row="1"
                             HeightRequest="1"
                             Color="{StaticResource SecondaryGrayColor}" />
+
+                        <!--#region TopicNotes-->
                         <ScrollView
                             Grid.Row="2"
                             Margin="0,30,0,30"
@@ -133,6 +132,8 @@
                                                                 BackgroundColor="{StaticResource BackgroundBlackColor}"
                                                                 BorderColor="red"
                                                                 BorderWidth="2"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteTopicNoteCommand}"
+                                                                CommandParameter="{Binding Id}"
                                                                 CornerRadius="16"
                                                                 FontSize="30"
                                                                 HeightRequest="20"
@@ -156,11 +157,7 @@
                                                                 WidthRequest="20" />
                                                         </HorizontalStackLayout>
                                                     </Grid>
-
                                                 </Frame>
-
-
-
                                             </VerticalStackLayout>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
@@ -172,6 +169,7 @@
                                     BackgroundColor="{StaticResource BackgroundBlackColor}"
                                     BorderColor="{StaticResource PrimaryColor}"
                                     BorderWidth="2"
+                                    Clicked="AddTopicNote_Clicked"
                                     CornerRadius="16"
                                     FontSize="25"
                                     HeightRequest="20"
@@ -181,11 +179,14 @@
                                     WidthRequest="20" />
                             </StackLayout>
                         </ScrollView>
+                        <!--#endregion-->
+
                     </Grid>
                 </Frame>
-
             </Grid>
+            <!--#endregion-->
 
+            <!--#region TopicChoice-->
             <Grid Grid.Column="1" ColumnDefinitions=".1*,.8*,.1*">
                 <ScrollView Grid.Column="1">
                     <StackLayout Spacing="18">
@@ -235,13 +236,11 @@
                     </StackLayout>
                 </ScrollView>
             </Grid>
+            <!--#endregion-->
 
         </Grid>
-
-
     </Grid>
-    <!--<ContentPage Title="SQL" />
-    <ContentPage Title=".NET">
-        <Label Text=".NET" />
-    </ContentPage>-->
+
+
+
 </ContentPage>

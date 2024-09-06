@@ -7,6 +7,16 @@ namespace LearnTrack.MVVM.ViewModels;
 [AddINotifyPropertyChangedInterface]
 public class LearnTrackViewModel
 {
+    public TopicNote CurrentTopicNote { get; set; } = new()
+    {
+        Description = "",
+        Date = DateTime.Now
+    };
+    public ICommand UpsertTopicNoteCommand =>
+        new Command(() => UpsertTopicNote());
+    public ICommand DeleteTopicNoteCommand =>
+        new Command<object>((id) => DeleteTopicNote(id));
+
     public List<Subject> Subjects { get; set; }
     public Subject? CurrentSubject { get; set; }
 	public Topic? CurrentTopic { get; set; }
@@ -22,12 +32,37 @@ public class LearnTrackViewModel
 
     public LearnTrackViewModel()
     {
-
         SetSubjects();
         SetCurrentSubject(Subjects[0].Id);
-		SetCurrentTopic(CurrentSubject.Topics[0].Id);
-
+        SetCurrentTopic(CurrentSubject.Topics[0].Id);
 	}
+
+    private void UpsertTopicNote()
+    {
+        CurrentTopicNote.TopicId = CurrentTopic.Id;
+		UpsertTopicNote2();
+        Refresh();
+        CurrentTopicNote = new();
+	}
+
+	private void GetTopicNotes()
+    {
+        var topicNotes = App.TopicNoteRepository.GetItems();
+    }
+
+    private void DeleteTopicNote(object id)
+    {
+        TopicNote topicNote = CurrentTopic.TopicNotes.FirstOrDefault(x => x.Id == (int)id);
+        App.TopicNoteRepository.DeleteItem(topicNote);
+		Refresh();
+	}
+
+    private void Refresh()
+    {
+        SetSubjects();
+        SetCurrentSubject(CurrentSubject.Id);
+        SetCurrentTopic(CurrentTopic.Id);
+    }
 
 	private void SetCurrentSubject(object id)
 	{
@@ -63,14 +98,14 @@ public class LearnTrackViewModel
         }
 	}
 
-	private void SetCurrentTopic(int topicId)
-	{
-		CurrentTopic = CurrentSubject.Topics.FirstOrDefault(x => x.Id == topicId);
-	}
-
     private void UpsertSubject()
     {
         App.SubjectRepository.UpsertItemWithChildren(CurrentSubject);
+    }
+
+    private void UpsertTopicNote2()
+    {
+        App.TopicNoteRepository.UpsertItemWithChildren(CurrentTopicNote);
     }
 
 	private void DeleteSubject()
