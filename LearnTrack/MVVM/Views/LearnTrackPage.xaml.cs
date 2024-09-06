@@ -2,7 +2,7 @@ using LearnTrack.MVVM.ViewModels;
 
 namespace LearnTrack.Pages;
 
-public partial class LearnTrackPage : TabbedPage
+public partial class LearnTrackPage : ContentPage
 {
 	public LearnTrackPage()
 	{
