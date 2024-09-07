@@ -1,4 +1,6 @@
 ﻿
+using LearnTrack.MVVM.Views;
+
 namespace LearnTrack.Pages;
 
 public partial class MainPage : ContentPage
