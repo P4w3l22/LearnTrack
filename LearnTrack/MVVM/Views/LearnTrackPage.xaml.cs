@@ -43,4 +43,14 @@ public partial class LearnTrackPage : ContentPage
 			await DisplayAlert("Odrzucono", "Anulowano.", "OK");
 		}
 	}
+
+	private void UpsertSubject_Clicked(object sender, EventArgs e)
+	{
+		this.ShowPopup(new UpsertSubjectPopupPage(viewModel));
+	}
+
+	private void UpDelSubject_Clicked(object sender, EventArgs e)
+	{
+		this.ShowPopup(new UpDelSubjectPopupPage(viewModel));
+	}
 }

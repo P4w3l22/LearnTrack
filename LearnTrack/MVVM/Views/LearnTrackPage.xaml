@@ -8,34 +8,66 @@
     BackgroundColor="{StaticResource BackgroundBlackColor}">
 
 
-    <Grid Grid.Row="1" RowDefinitions="50,1,*">
+    <Grid Grid.Row="1" RowDefinitions="60,1,100,*">
 
         <!--#region SubjectsChoice-->
-        <CollectionView Margin="20,0,20,0" ItemsSource="{Binding Subjects}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout Grid.Row="0">
-                        <Button
-                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ChangeSubjectCommand}"
-                            CommandParameter="{Binding Id}"
-                            Text="{Binding Name}"
-                            TextColor="{StaticResource Gray200}" />
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Grid Grid.Row="0">
+            <HorizontalStackLayout>
+                <CollectionView Margin="20,0,20,0" ItemsSource="{Binding Subjects}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout VerticalOptions="Center">
+                                <Button
+                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ChangeSubjectCommand}"
+                                    CommandParameter="{Binding Id}"
+                                    Text="{Binding Name}"
+                                    TextColor="{StaticResource Gray200}" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button
+                    Grid.Column="2"
+                    Margin="0"
+                    Padding="0"
+                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                    BorderColor="{StaticResource PrimaryColor}"
+                    BorderWidth="2"
+                    Clicked="UpsertSubject_Clicked"
+                    CornerRadius="16"
+                    FontSize="25"
+                    HeightRequest="20"
+                    HorizontalOptions="Center"
+                    Text="+"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center"
+                    WidthRequest="20" />
+            </HorizontalStackLayout>
+        </Grid>
         <!--#endregion-->
 
         <BoxView Grid.Row="1" Margin="20,0,20,0" />
 
+        <!--#region CurrentSubjectTitle-->
+        <Button
+            Grid.Row="2"
+            BackgroundColor="{StaticResource BackgroundBlackColor}"
+            Clicked="UpDelSubject_Clicked"
+            FontSize="55"
+            HorizontalOptions="Center"
+            Text="{Binding CurrentSubject.Name}"
+            TextColor="{StaticResource PrimaryColor}"
+            VerticalOptions="Center" />
+        <!--#endregion-->
 
+        <!--#region TopicSection-->
 
         <Grid
-            Grid.Row="2"
+            Grid.Row="3"
             Margin="30"
             ColumnDefinitions=".6*,.4*">
 
@@ -246,6 +278,7 @@
             <!--#endregion-->
 
         </Grid>
+        <!--#endregion-->
     </Grid>
 
 

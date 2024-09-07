@@ -16,7 +16,7 @@
             <Grid Padding="0" ColumnDefinitions="*,50">
                 <Label
                     FontSize="25"
-                    Text="Nowy temat"
+                    Text="Dodaj / edytuj temat"
                     TextColor="{StaticResource PrimaryColor}" />
             </Grid>
             <BoxView Grid.Row="1" Color="{StaticResource SecondaryGrayColor}" />

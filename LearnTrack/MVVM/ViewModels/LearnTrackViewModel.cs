@@ -7,6 +7,7 @@ namespace LearnTrack.MVVM.ViewModels;
 [AddINotifyPropertyChangedInterface]
 public class LearnTrackViewModel
 {
+    // TopicNote CRUD variables + commands
     public TopicNote CurrentTopicNote { get; set; } = new()
     {
         Description = "",
@@ -19,9 +20,9 @@ public class LearnTrackViewModel
     public ICommand ChangeTopicNoteCommand =>
         new Command<object>((id) => ChangeCurrentTopicNote(id));
 
-    
 
-    public Topic? CurrentTopic { get; set; }
+	// Topic CRUD variables + commands
+	public Topic? CurrentTopic { get; set; }
     public Topic? NewTopic { get; set; }
     public ICommand UpsertTopicCommand =>
         new Command(() => UpsertTopic());
@@ -33,12 +34,19 @@ public class LearnTrackViewModel
 		new Command<object>((id) => SetCurrentTopic(id));
 
 
+	// Subject CRUD variables + commands
+	public Subject NewSubject { get; set; }
+    public ICommand UpsertSubjectCommand =>
+        new Command(() => UpsertSubject());
 
-    public List<Subject> Subjects { get; set; }
+
+
+	// LearnTrackPage details variables + commands
+	public List<Subject> Subjects { get; set; }
     public Subject? CurrentSubject { get; set; }
-    public ICommand UpsertCommand =>
-        new Command(() => SaveCurrentSubject());
-    public ICommand DeleteCommand =>
+    //public ICommand UpsertCommand =>
+    //    new Command(() => SaveCurrentSubject());
+    public ICommand DeleteSubjectCommand =>
         new Command(() => DeleteCurrentSubject());
 	public ICommand ChangeSubjectCommand =>
 		new Command<object>((id) => ChangeCurrentSubject(id));
@@ -51,11 +59,12 @@ public class LearnTrackViewModel
         SetCurrentSubject(Subjects[0].Id);
         SetCurrentTopic(CurrentSubject.Topics[0].Id);
         NewTopic = new();
+        NewSubject = new();
 	}
 
 
-
-    private void ChangeCurrentTopicNote(object id)
+	// TopicNote CRUD methods
+	private void ChangeCurrentTopicNote(object id)
     {
         CurrentTopicNote = CurrentTopic.TopicNotes.FirstOrDefault(x => x.Id == (int)id);
     }
@@ -102,8 +111,8 @@ public class LearnTrackViewModel
     }
 
 
-
-    private void SetCurrentTopic(object id)
+	// Topic CRUD methods
+	private void SetCurrentTopic(object id)
 	{
 		CurrentTopic = CurrentSubject.Topics.FirstOrDefault(x => x.Id == (int)id);
 	}
@@ -116,7 +125,6 @@ public class LearnTrackViewModel
         }
 		SaveModelTopic();
         Refresh();
-		SetCurrentTopic(CurrentSubject.Topics[CurrentSubject.Topics.Count() - 1].Id);
 		NewTopic = new();
 	}
 
@@ -124,7 +132,6 @@ public class LearnTrackViewModel
     {
         NewTopic = CurrentTopic;
     }
-
 
 	private void DeleteTopic()
     {
@@ -139,20 +146,51 @@ public class LearnTrackViewModel
     }
 
 
+    // Subject CRUD methods
+    private void UpsertSubject()
+    {
+        if (NewSubject.Name is null ||  NewSubject.Name.Length == 0)
+        {
+            NewSubject = CurrentSubject;
+        }
+        SaveModelSubject();
+        Refresh();
+        NewSubject = new();
+    }
 
-    private void Refresh()
+    private void DeleteSubject()
+    {
+
+    }
+
+    private void SaveModelSubject()
+    {
+        App.SubjectRepository.UpsertItemWithChildren(NewSubject);
+    }
+
+
+	// LearnTrackPage details methods
+	private void Refresh()
     {
         SetSubjects();
         SetCurrentSubject(CurrentSubject.Id);
         SetCurrentTopic(CurrentTopic.Id);
     }
-
-
-
     private void ChangeCurrentSubject(object id)
     {
 		SetCurrentSubject(id);
-		SetCurrentTopic(CurrentSubject.Topics[0].Id);
+        if (CurrentSubject.Topics.Count > 0)
+        {
+            SetCurrentTopic(CurrentSubject.Topics[0].Id);
+        }
+        else
+        {
+            CurrentTopic = new()
+            {
+                Name = "Brak tematów"
+            };
+        }
+		
 	}
 	private void SetCurrentSubject(object id)
 	{
@@ -174,6 +212,9 @@ public class LearnTrackViewModel
 	private void DeleteCurrentSubject()
     {
         App.SubjectRepository.DeleteItem(CurrentSubject);
-    }
+		SetSubjects();
+		SetCurrentSubject(Subjects[0].Id);
+		SetCurrentTopic(CurrentSubject.Topics[0].Id);
+	}
 
 }

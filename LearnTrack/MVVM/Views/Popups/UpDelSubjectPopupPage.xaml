@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <mct:Popup
-    x:Class="LearnTrack.MVVM.Views.Popups.UpsertTopicNotePopupPage"
+    x:Class="LearnTrack.MVVM.Views.Popups.UpDelSubjectPopupPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
     CanBeDismissedByTappingOutsideOfPopup="False">
-    <!--  CanBeDismissedByTappingOutsideOfPopup="True"  -->
     <Frame
         Padding="20"
         BackgroundColor="{StaticResource BackgroundBlackColor}"
@@ -17,7 +16,7 @@
             <Grid Padding="0" ColumnDefinitions="*,50">
                 <Label
                     FontSize="25"
-                    Text="Dodaj / edytuj notatkę"
+                    Text="Edytuj / usuń przedmiot"
                     TextColor="{StaticResource PrimaryColor}" />
             </Grid>
             <BoxView Grid.Row="1" Color="{StaticResource SecondaryGrayColor}" />
@@ -29,10 +28,24 @@
                 <Editor
                     AutoSize="TextChanges"
                     Placeholder="Tekst notatki.."
-                    Text="{Binding CurrentTopicNote.Description}" />
-                <DatePicker Date="{Binding CurrentTopicNote.Date}" />
+                    Text="{Binding CurrentSubject.Name}" />
             </StackLayout>
             <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center">
+                <Button
+                    Margin="0,0,9,0"
+                    Padding="0"
+                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                    BorderColor="Red"
+                    BorderWidth="2"
+                    Clicked="CloseButton_Clicked"
+                    Command="{Binding DeleteSubjectCommand}"
+                    CornerRadius="16"
+                    FontSize="25"
+                    HeightRequest="20"
+                    HorizontalOptions="Center"
+                    Text="-"
+                    TextColor="Red"
+                    WidthRequest="20" />
                 <Button
                     Margin="0,0,9,0"
                     Padding="0"
@@ -40,7 +53,7 @@
                     BorderColor="{StaticResource PrimaryColor}"
                     BorderWidth="2"
                     Clicked="CloseButton_Clicked"
-                    Command="{Binding UpsertTopicNoteCommand}"
+                    Command="{Binding UpsertSubjectCommand}"
                     CornerRadius="16"
                     FontSize="25"
                     HeightRequest="20"
@@ -48,6 +61,7 @@
                     Text="+"
                     TextColor="{StaticResource PrimaryColor}"
                     WidthRequest="20" />
+
                 <Button
                     Grid.Column="1"
                     Margin="0"
