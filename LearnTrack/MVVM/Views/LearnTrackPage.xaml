@@ -79,7 +79,14 @@
                     BorderColor="{StaticResource SecondaryGrayColor}"
                     CornerRadius="30">
                     <Grid RowDefinitions=".1*,1,.8*">
-
+                        <Grid.Triggers>
+                            <DataTrigger
+                                Binding="{Binding CurrentTopic.Name}"
+                                TargetType="Grid"
+                                Value="">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Grid.Triggers>
                         <!--#region TopicHeader-->
                         <Grid Grid.Row="0" ColumnDefinitions=".7*,.1*,.2*">
                             <Label

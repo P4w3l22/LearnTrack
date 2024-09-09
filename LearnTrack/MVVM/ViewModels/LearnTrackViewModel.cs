@@ -7,50 +7,36 @@ namespace LearnTrack.MVVM.ViewModels;
 [AddINotifyPropertyChangedInterface]
 public class LearnTrackViewModel
 {
-    // TopicNote CRUD variables + commands
-    public TopicNote CurrentTopicNote { get; set; } = new()
-    {
-        Description = "",
-        Date = DateTime.Now
-    };
-    public ICommand UpsertTopicNoteCommand =>
-        new Command(() => UpsertTopicNote());
-    public ICommand DeleteTopicNoteCommand =>
-        new Command<object>((id) => DeleteTopicNote(id));
-    public ICommand ChangeTopicNoteCommand =>
-        new Command<object>((id) => ChangeCurrentTopicNote(id));
-
-
-	// Topic CRUD variables + commands
-	public Topic? CurrentTopic { get; set; }
-    public Topic? NewTopic { get; set; }
-    public ICommand UpsertTopicCommand =>
-        new Command(() => UpsertTopic());
-	public ICommand SetUpdateTopicCommand =>
-		new Command(() => SetUpdateTopic());
-	public ICommand DeleteTopicCommand =>
-        new Command(() => DeleteTopic());
-	public ICommand ChangeTopicCommand =>
-		new Command<object>((id) => SetCurrentTopic(id));
-
-
-	// Subject CRUD variables + commands
-	public Subject NewSubject { get; set; }
-    public ICommand UpsertSubjectCommand =>
-        new Command(() => UpsertSubject());
-
-
-
-	// LearnTrackPage details variables + commands
 	public List<Subject> Subjects { get; set; }
     public Subject? CurrentSubject { get; set; }
-    //public ICommand UpsertCommand =>
-    //    new Command(() => SaveCurrentSubject());
-    public ICommand DeleteSubjectCommand =>
-        new Command(() => DeleteCurrentSubject());
-	public ICommand ChangeSubjectCommand =>
-		new Command<object>((id) => ChangeCurrentSubject(id));
+	public Topic? CurrentTopic { get; set; }
+    public TopicNote CurrentTopicNote { get; set; } = new()
+    {
+        Date = DateTime.Now
+    };
+	public Subject NewSubject { get; set; }
+    public Topic? NewTopic { get; set; }
 
+    public ICommand ChangeSubjectCommand =>
+		new Command<object>((id) => ChangeCurrentSubject(id));
+	public ICommand ChangeTopicCommand =>
+		new Command<object>((id) => SetCurrentTopic(id));
+    public ICommand ChangeTopicNoteCommand =>
+        new Command<object>((id) => SetCurrentTopicNote(id));
+    public ICommand UpsertSubjectCommand =>
+        new Command(() => UpsertSubject());
+    public ICommand UpsertTopicCommand =>
+        new Command(() => UpsertTopic());
+    public ICommand UpsertTopicNoteCommand =>
+        new Command(() => UpsertTopicNote());
+    public ICommand DeleteSubjectCommand =>
+        new Command(() => DeleteSubject());
+	public ICommand DeleteTopicCommand =>
+        new Command(() => DeleteTopic());
+    public ICommand DeleteTopicNoteCommand =>
+        new Command<object>((id) => DeleteTopicNote(id));
+	public ICommand SetUpdateTopicCommand =>
+		new Command(() => SetUpdateTopic());
 
     
     public LearnTrackViewModel()
@@ -63,11 +49,62 @@ public class LearnTrackViewModel
 	}
 
 
-	// TopicNote CRUD methods
-	private void ChangeCurrentTopicNote(object id)
+    private void ChangeCurrentSubject(object id)
+    {
+		SetCurrentSubject(id);
+        if (CurrentSubject.Topics.Count > 0)
+        {
+            SetCurrentTopic(CurrentSubject.Topics[0].Id);
+        }
+        else
+        {
+            CurrentTopic = new()
+            {
+                Name = ""
+            };
+        }
+	}
+
+	private void SetCurrentTopic(object id)
+	{
+		CurrentTopic = CurrentSubject.Topics.FirstOrDefault(x => x.Id == (int)id);
+	}
+
+	private void SetCurrentTopicNote(object id)
     {
         CurrentTopicNote = CurrentTopic.TopicNotes.FirstOrDefault(x => x.Id == (int)id);
     }
+
+	private void UpsertSubject()
+	{
+		if (NewSubject.Name is null || NewSubject.Name.Length == 0)
+		{
+			NewSubject = CurrentSubject;
+		}
+		SaveModelSubject();
+		Refresh(true, true);
+        if (CurrentTopic.TopicNotes.Count == 0)
+        {
+            CurrentTopic = new() { Name = "" };
+        }
+		NewSubject = new();
+	}
+
+	private void UpsertTopic()
+	{
+		if (NewTopic.SubjectId == 0)
+		{
+			NewTopic.SubjectId = CurrentSubject.Id;
+		}
+		SaveModelTopic();
+		Refresh();
+        if (CurrentSubject.Topics.Count == 0)
+        {
+            CurrentSubject = Subjects.FirstOrDefault(x => x.Id == CurrentSubject.Id);
+        }
+        CurrentTopic = CurrentSubject.Topics[CurrentSubject.Topics.Count - 1];
+		NewTopic = new();
+	}
 
 	private void UpsertTopicNote()
     {
@@ -80,10 +117,28 @@ public class LearnTrackViewModel
         CurrentTopicNote = new() { Date=DateTime.Now };
 	}
 
-	private void GetTopicNotes()
-    {
-        var topicNotes = App.TopicNoteRepository.GetItems();
-    }
+	private void DeleteSubject()
+	{
+		App.SubjectRepository.DeleteItem(CurrentSubject);
+        Refresh(true);
+		SetCurrentSubject(Subjects[Subjects.Count - 1].Id);
+		SetCurrentTopic(CurrentSubject.Topics[CurrentSubject.Topics.Count - 1].Id);
+	}
+
+	private void DeleteTopic()
+	{
+		App.TopicRepository.DeleteItem(CurrentTopic);
+		Refresh();
+        if (CurrentSubject.Topics.Count() > 0)
+        {
+            SetCurrentTopic(CurrentSubject.Topics[CurrentSubject.Topics.Count() - 1].Id);
+        }
+        else
+        {
+            CurrentTopic = new() { Name = "" };
+        }
+		
+	}
 
     private void DeleteTopicNote(object id)
     {
@@ -91,7 +146,70 @@ public class LearnTrackViewModel
         App.TopicNoteRepository.DeleteItem(topicNote);
 		Refresh();
 	}
+    
+    private void SetUpdateTopic()
+    {
+        NewTopic = CurrentTopic;
+    }
 
+
+
+
+    private void SaveCurrentTopicNote()
+    {
+        App.TopicNoteRepository.UpsertItemWithChildren(CurrentTopicNote);
+    }
+
+	private void SaveModelTopic()
+    {
+        App.TopicRepository.UpsertItemWithChildren(NewTopic);
+    }
+
+    private void SaveModelSubject()
+    {
+        App.SubjectRepository.UpsertItemWithChildren(NewSubject);
+    }
+
+    // TODO: refaktoryzacja refresh
+	private void Refresh(bool defaultValues = false, bool isCreating = false)
+    {
+        SetSubjects();
+        if (CurrentSubject.Topics.Count > 0 | isCreating)
+        {
+            if (defaultValues)
+            {
+			    SetCurrentSubject(Subjects[0].Id);
+			    SetCurrentTopic(CurrentSubject.Topics[0].Id);
+		    }
+            else
+            {
+                SetCurrentSubject(CurrentSubject.Id);
+                SetCurrentTopic(CurrentTopic.Id);
+            }
+        }
+        else
+        {
+            CurrentTopic = new() { Name = "" };
+        }
+        
+    }
+    
+	private void SetCurrentSubject(object id)
+	{
+		CurrentSubject = Subjects.FirstOrDefault(x => x.Id == (int)id);
+	}
+    
+
+    // Wyodrębnić do serwisu
+    private void SetSubjects()
+    {
+		Subjects = App.SubjectRepository.GetItemsWithChildren();
+        if (Subjects is null)
+        {
+			Subjects = new();
+        }
+        SetTopicNotes();
+    }
     private void SetTopicNotes()
     {
         var topicNotes = App.TopicNoteRepository.GetItems();
@@ -104,117 +222,4 @@ public class LearnTrackViewModel
             }
         }
 	}
-
-    private void SaveCurrentTopicNote()
-    {
-        App.TopicNoteRepository.UpsertItemWithChildren(CurrentTopicNote);
-    }
-
-
-	// Topic CRUD methods
-	private void SetCurrentTopic(object id)
-	{
-		CurrentTopic = CurrentSubject.Topics.FirstOrDefault(x => x.Id == (int)id);
-	}
-
-    private void UpsertTopic()
-    {
-        if (NewTopic.SubjectId == 0)
-        {
-            NewTopic.SubjectId = CurrentSubject.Id;
-        }
-		SaveModelTopic();
-        Refresh();
-		NewTopic = new();
-	}
-
-    private void SetUpdateTopic()
-    {
-        NewTopic = CurrentTopic;
-    }
-
-	private void DeleteTopic()
-    {
-        App.TopicRepository.DeleteItem(CurrentTopic);
-        Refresh();
-        SetCurrentTopic(CurrentSubject.Topics[CurrentSubject.Topics.Count() - 1].Id);
-    }
-
-	private void SaveModelTopic()
-    {
-        App.TopicRepository.UpsertItemWithChildren(NewTopic);
-    }
-
-
-    // Subject CRUD methods
-    private void UpsertSubject()
-    {
-        if (NewSubject.Name is null ||  NewSubject.Name.Length == 0)
-        {
-            NewSubject = CurrentSubject;
-        }
-        SaveModelSubject();
-        Refresh();
-        NewSubject = new();
-    }
-
-    private void DeleteSubject()
-    {
-
-    }
-
-    private void SaveModelSubject()
-    {
-        App.SubjectRepository.UpsertItemWithChildren(NewSubject);
-    }
-
-
-	// LearnTrackPage details methods
-	private void Refresh()
-    {
-        SetSubjects();
-        SetCurrentSubject(CurrentSubject.Id);
-        SetCurrentTopic(CurrentTopic.Id);
-    }
-    private void ChangeCurrentSubject(object id)
-    {
-		SetCurrentSubject(id);
-        if (CurrentSubject.Topics.Count > 0)
-        {
-            SetCurrentTopic(CurrentSubject.Topics[0].Id);
-        }
-        else
-        {
-            CurrentTopic = new()
-            {
-                Name = "Brak tematów"
-            };
-        }
-		
-	}
-	private void SetCurrentSubject(object id)
-	{
-		CurrentSubject = Subjects.FirstOrDefault(x => x.Id == (int)id);
-	}
-    private void SetSubjects()
-    {
-		Subjects = App.SubjectRepository.GetItemsWithChildren();
-        if (Subjects is null)
-        {
-			Subjects = new();
-        }
-        SetTopicNotes();
-    }
-    private void SaveCurrentSubject()
-    {
-        App.SubjectRepository.UpsertItemWithChildren(CurrentSubject);
-    }
-	private void DeleteCurrentSubject()
-    {
-        App.SubjectRepository.DeleteItem(CurrentSubject);
-		SetSubjects();
-		SetCurrentSubject(Subjects[0].Id);
-		SetCurrentTopic(CurrentSubject.Topics[0].Id);
-	}
-
 }
