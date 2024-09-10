@@ -1,4 +1,5 @@
 ﻿using LearnTrack.MVVM.Models;
+using Newtonsoft.Json.Bson;
 using PropertyChanged;
 using System.Windows.Input;
 using System.Xml.Serialization;
@@ -6,9 +7,25 @@ using System.Xml.Serialization;
 namespace LearnTrack.MVVM.ViewModels;
 
 [AddINotifyPropertyChangedInterface]
-class CalendarViewModel
+public class CalendarViewModel
 {
 	public List<CalendarCardModel> CalendarCards { get; set; }
+    public List<string> MonthNames = new()
+    {
+        "Styczeń",
+        "Luty",
+        "Marzec",
+        "Kwiecień",
+        "Maj",
+        "Czerwiec",
+        "Lipiec",
+        "Sierpień",
+        "Wrzesień",
+        "Październik",
+        "Listopad",
+        "Grudzień"
+    };
+    public string SelectedMonthName {  get; set; }
 
 	public int DaysInSelectedMonth
     {
@@ -17,9 +34,9 @@ class CalendarViewModel
     }
     public int SelectedDay { get; set; }
     public int SelectedMonth { get; set; }
-    public int SelectedMonthId { get; set; }
     public int SelectedYear { get; set; }
     public string SelectedDate { get; set; }
+    public DailyNote NewDailyNote { get; set; }
     public List<DailyNote> CurrentDailyNotes { get; set; }
 
     public ICommand ChangeSelectedDayCommand =>
@@ -28,6 +45,10 @@ class CalendarViewModel
         new Command(() => IncrementSelectedMonth());
 	public ICommand DecrementSelectedMonthCommand =>
 		new Command(() => DecrementSelectedMonth());
+    public ICommand UpsertDailyNoteCommand =>
+        new Command(() => UpsertDailyNote());
+	public ICommand DeleteDailyNoteCommand =>
+	new Command<object>((id) => DeleteDailyNote(id));
 
 
 
@@ -35,6 +56,15 @@ class CalendarViewModel
     {
         SetDefaultCurrentDate();
         SetCalendarCards();
+        SetCurrentDailyNotes();
+		SelectedMonthName = MonthNames[SelectedMonth - 1];
+
+	}
+
+	private void SetCurrentDailyNotes()
+    {
+        NewDailyNote = new() { Date = new DateTime(SelectedYear, SelectedMonth, SelectedDay) };
+		CurrentDailyNotes = App.DailyNoteRepository.GetItems().Where(x => x.Date.ToString("dd.MM.yyyy") == SelectedDate).ToList();
     }
 
     private void SetDefaultCurrentDate()
@@ -42,7 +72,6 @@ class CalendarViewModel
 		SelectedDate = DateTime.Now.ToString("dd.MM.yyyy");
 		SelectedDay = DateTime.Now.Day;
 		SelectedMonth = DateTime.Now.Month;
-        SelectedMonthId = SelectedMonth - 1;
 		SelectedYear = DateTime.Now.Year;
     }
 
@@ -50,7 +79,8 @@ class CalendarViewModel
 	{
         SelectedDay = (int)day;
         SelectedDate = new DateTime(SelectedYear, SelectedMonth, SelectedDay).ToString("dd.MM.yyyy");
-    }
+		SetCurrentDailyNotes();
+	}
 
     private void IncrementSelectedMonth()
 	{
@@ -63,8 +93,8 @@ class CalendarViewModel
         {
             SelectedMonth++;
         }
-		SelectedMonthId = SelectedMonth - 1;
 		SetCalendarCards();
+		SelectedMonthName = MonthNames[SelectedMonth - 1];
 	}
 
 	private void DecrementSelectedMonth()
@@ -78,8 +108,29 @@ class CalendarViewModel
         {
             SelectedMonth--;
         }
-		SelectedMonthId = SelectedMonth - 1;
 		SetCalendarCards();
+		SelectedMonthName = MonthNames[SelectedMonth - 1];
+	}
+
+    private void DeleteDailyNote(object id)
+    {
+        App.DailyNoteRepository.DeleteItem(CurrentDailyNotes.FirstOrDefault(x => x.Id == (int)id));
+		SetCurrentDailyNotes();
+	}
+
+
+	public void UpdateDailyNote()
+    {
+        foreach (DailyNote dailyNote in CurrentDailyNotes)
+        {
+            App.DailyNoteRepository.UpsertItemWithChildren(dailyNote);
+        }
+	}
+
+    private void UpsertDailyNote()
+    {
+        App.DailyNoteRepository.UpsertItemWithChildren(NewDailyNote);
+        SetCurrentDailyNotes();
 	}
 
 	private void SetCalendarCards()

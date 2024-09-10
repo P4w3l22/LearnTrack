@@ -12,5 +12,5 @@ public class DailyNote : TableData
     [NotNull]
 	public DateTime Date { get; set; }
     [NotNull]
-	public bool IsCompleted { get; set; }
+	public bool IsCompleted { get; set; } = false;
 }

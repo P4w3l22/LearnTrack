@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+    x:Class="LearnTrack.MVVM.Views.Popups.InsertDailyNotePopupPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+    CanBeDismissedByTappingOutsideOfPopup="False">
+    <Frame
+        Padding="20"
+        BackgroundColor="{StaticResource BackgroundBlackColor}"
+        CornerRadius="0">
+        <Grid
+            HeightRequest="400"
+            RowDefinitions="50, 1, *, 50"
+            WidthRequest="600">
+            <Grid Padding="0" ColumnDefinitions="*,50">
+                <Label
+                    FontSize="25"
+                    Text="Dodaj / edytuj przedmiot"
+                    TextColor="{StaticResource PrimaryColor}" />
+            </Grid>
+            <BoxView Grid.Row="1" Color="{StaticResource SecondaryGrayColor}" />
+            <StackLayout
+                Grid.Row="2"
+                Margin="10"
+                Spacing="10"
+                VerticalOptions="Center">
+                <Editor
+                    AutoSize="TextChanges"
+                    Placeholder="Tytuł.."
+                    Text="{Binding NewDailyNote.Title}" />
+                <Editor
+                    AutoSize="TextChanges"
+                    Placeholder="Zawartość.."
+                    Text="{Binding NewDailyNote.Content}" />
+            </StackLayout>
+            <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center">
+                <Button
+                    Margin="0,0,9,0"
+                    Padding="0"
+                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                    BorderColor="{StaticResource PrimaryColor}"
+                    BorderWidth="2"
+                    Clicked="CloseButton_Clicked"
+                    Command="{Binding UpsertDailyNoteCommand}"
+                    CornerRadius="16"
+                    FontSize="25"
+                    HeightRequest="20"
+                    HorizontalOptions="Center"
+                    Text="+"
+                    TextColor="{StaticResource PrimaryColor}"
+                    WidthRequest="20" />
+                <Button
+                    Grid.Column="1"
+                    Margin="0"
+                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                    Clicked="CloseButton_Clicked"
+                    Text="Anuluj"
+                    TextColor="{StaticResource Gray400}"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Frame>
+</mct:Popup>
