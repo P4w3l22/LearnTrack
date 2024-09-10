@@ -37,7 +37,7 @@
                     BackgroundColor="{StaticResource BackgroundBlackColor}"
                     BorderColor="{StaticResource PrimaryColor}"
                     BorderWidth="2"
-                    Clicked="UpsertSubject_Clicked"
+                    Clicked="InsertSubject_Clicked"
                     CornerRadius="16"
                     FontSize="25"
                     HeightRequest="20"

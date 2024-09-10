@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="CalendarPage"
     BackgroundColor="{StaticResource BackgroundBlackColor}">
-    <Grid ColumnDefinitions="100,.3*,.05*,.5*,.05*" RowDefinitions=".1*,.9*">
+    <Grid ColumnDefinitions="100,.3*,.05*,.5*,.05*" RowDefinitions=".15*,.85*">
 
 
         <Grid Grid.RowSpan="2" Grid.Column="1">
@@ -19,12 +19,12 @@
                         Grid.Row="0"
                         FontSize="Large"
                         HorizontalOptions="Center"
-                        Text="{Binding ActualDate}"
+                        Text="{Binding SelectedDate}"
                         VerticalOptions="Center" />
                     <BoxView Grid.Row="1" Color="{StaticResource SecondaryGrayColor}" />
                     <ScrollView Grid.Row="2" Margin="0,40,0,20">
                         <StackLayout>
-                            <CollectionView ItemsSource="{Binding Notes}">
+                            <!--<CollectionView ItemsSource="{Binding Notes}">
                                 <CollectionView.ItemsLayout>
                                     <GridItemsLayout
                                         HorizontalItemSpacing="20"
@@ -52,7 +52,7 @@
                                         </Frame>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
-                            </CollectionView>
+                            </CollectionView>-->
                             <Button
                                 Padding="0"
                                 BackgroundColor="{StaticResource BackgroundBlackColor}"
@@ -70,54 +70,140 @@
         </Grid>
 
 
-        <!--#region CalendarCards-->
-        <Grid
-            Grid.Row="0"
-            Grid.Column="3"
-            ColumnDefinitions="*,*,*,*,*,*,*"
-            RowDefinitions="*,1">
-            <Label
-                Grid.Column="0"
-                HorizontalOptions="Center"
-                Text="Pon"
-                VerticalOptions="Center" />
-            <Label
-                Grid.Column="1"
-                HorizontalOptions="Center"
-                Text="Wt"
-                VerticalOptions="Center" />
-            <Label
-                Grid.Column="2"
-                HorizontalOptions="Center"
-                Text="Śr"
-                VerticalOptions="Center" />
-            <Label
-                Grid.Column="3"
-                HorizontalOptions="Center"
-                Text="Czw"
-                VerticalOptions="Center" />
-            <Label
-                Grid.Column="4"
-                HorizontalOptions="Center"
-                Text="Ptk"
-                VerticalOptions="Center" />
-            <Label
-                Grid.Column="5"
-                HorizontalOptions="Center"
-                Text="Sob"
-                VerticalOptions="Center" />
-            <Label
-                Grid.Column="6"
-                HorizontalOptions="Center"
-                Text="Nie"
-                VerticalOptions="Center" />
-            <BoxView
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="7"
-                Color="{StaticResource SecondaryGrayColor}" />
-        </Grid>
 
+        <!--#region CalendarCards-->
+        <Grid Grid.Column="3" RowDefinitions="*,*">
+            <Grid HorizontalOptions="Center">
+                <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween">
+                    <Button
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Command="{Binding DecrementSelectedMonthCommand}"
+                        FontFamily="Icons"
+                        FontSize="25"
+                        HeightRequest="30"
+                        Text="&#xE803;"
+                        WidthRequest="30" />
+                    <!--<DatePicker Format="yyyy" />-->
+                    <HorizontalStackLayout>
+                        <Button
+                            x:Name="Month_Button"
+                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                            FontSize="20"
+                            Text=""
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center" />
+                        <Picker
+                            x:Name="Month_Picker"
+                            FontSize="20"
+                            IsVisible="False"
+                            SelectedIndex="{Binding SelectedMonthId}"
+                            SelectedIndexChanged="Month_Picker_SelectedIndexChanged"
+                            TextColor="{StaticResource PrimaryColor}"
+                            WidthRequest="150">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Styczeń</x:String>
+                                    <x:String>Luty</x:String>
+                                    <x:String>Marzec</x:String>
+                                    <x:String>Kwiecień</x:String>
+                                    <x:String>Maj</x:String>
+                                    <x:String>Czerwiec</x:String>
+                                    <x:String>Lipiec</x:String>
+                                    <x:String>Sierpień</x:String>
+                                    <x:String>Wrzesień</x:String>
+                                    <x:String>Październik</x:String>
+                                    <x:String>Listopad</x:String>
+                                    <x:String>Grudzień</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                        <Button
+                            x:Name="Year_Button"
+                            BackgroundColor="{StaticResource BackgroundBlackColor}"
+                            FontSize="20"
+                            Text="{Binding SelectedYear}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center" />
+                        <!--<Picker
+                            x:Name="Year_Picker"
+                            FontSize="20"
+                            IsVisible="False"
+                            SelectedIndex="0"
+                            SelectedIndexChanged="Year_Picker_SelectedIndexChanged"
+                            TextColor="{StaticResource PrimaryColor}"
+                            WidthRequest="100">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:Int32}">
+                                    <x:Int32>2028</x:Int32>
+                                    <x:Int32>2027</x:Int32>
+                                    <x:Int32>2026</x:Int32>
+                                    <x:Int32>2025</x:Int32>
+                                    <x:Int32>2024</x:Int32>
+                                    <x:Int32>2023</x:Int32>
+                                    <x:Int32>2022</x:Int32>
+                                    <x:Int32>2021</x:Int32>
+                                    <x:Int32>2020</x:Int32>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>-->
+                    </HorizontalStackLayout>
+                    <Button
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Command="{Binding IncrementSelectedMonthCommand}"
+                        FontFamily="Icons"
+                        FontSize="25"
+                        HeightRequest="30"
+                        Text="&#xE804;"
+                        WidthRequest="30" />
+                </FlexLayout>
+            </Grid>
+            <Grid
+                Grid.Row="1"
+                ColumnDefinitions="*,*,*,*,*,*,*"
+                RowDefinitions="*,1"
+                VerticalOptions="Center">
+                <Label
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    Text="Pon"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    Text="Wt"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="2"
+                    HorizontalOptions="Center"
+                    Text="Śr"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="3"
+                    HorizontalOptions="Center"
+                    Text="Czw"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="4"
+                    HorizontalOptions="Center"
+                    Text="Ptk"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="5"
+                    HorizontalOptions="Center"
+                    Text="Sob"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="6"
+                    HorizontalOptions="Center"
+                    Text="Nie"
+                    VerticalOptions="Center" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="7"
+                    Color="{StaticResource SecondaryGrayColor}" />
+            </Grid>
+        </Grid>
         <Grid
             Grid.Row="1"
             Grid.Column="3"
@@ -133,7 +219,6 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-
                         <Frame
                             Grid.Row="{Binding RowId}"
                             Grid.Column="{Binding ColumnId}"
@@ -143,11 +228,23 @@
                             BorderColor="{StaticResource SecondaryGrayColor}"
                             HeightRequest="100"
                             WidthRequest="70">
+
+                            <Frame.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsCurrentMonth}"
+                                    TargetType="Frame"
+                                    Value="False">
+                                    <Setter Property="Opacity" Value=".3" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+
                             <Grid RowDefinitions="*,1,*">
+                                <!--  Clicked="CalendarCard_Clicked"  -->
                                 <Button
                                     Grid.Row="0"
                                     BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                    Clicked="CalendarCard_Clicked"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ChangeSelectedDayCommand}"
+                                    CommandParameter="{Binding DayNumber}"
                                     FontSize="30"
                                     HorizontalOptions="Center"
                                     Text="{Binding DayNumber}"

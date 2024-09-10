@@ -3,9 +3,9 @@ using LearnTrack.MVVM.ViewModels;
 
 namespace LearnTrack.MVVM.Views.Popups;
 
-public partial class UpsertSubjectPopupPage : Popup
+public partial class InsertSubjectPopupPage : Popup
 {
-	public UpsertSubjectPopupPage(LearnTrackViewModel viewModel)
+	public InsertSubjectPopupPage(LearnTrackViewModel viewModel)
 	{
 		InitializeComponent();
 

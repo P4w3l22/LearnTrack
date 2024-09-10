@@ -68,6 +68,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="MVVM\Views\Popups\InsertSubjectPopupPage.xaml.cs">
+	    <DependentUpon>InsertSubjectPopupPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="MVVM\Views\Popups\UpsertTopicNotePopupPage.xaml.cs">
 	    <DependentUpon>UpsertTopicNotePopupPage.xaml</DependentUpon>
 	  </Compile>
@@ -86,7 +89,7 @@
 	  <MauiXaml Update="MVVM\Views\Popups\UpDelSubjectPopupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="MVVM\Views\Popups\UpsertSubjectPopupPage.xaml">
+	  <MauiXaml Update="MVVM\Views\Popups\InsertSubjectPopupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Popups\UpsertTopicNotePopupPage.xaml">

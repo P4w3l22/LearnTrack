@@ -6,4 +6,5 @@ public class CalendarCardModel
     public int NotesNumber { get; set; }
     public int ColumnId { get; set; }
     public int RowId { get; set; }
+    public bool IsCurrentMonth { get; set; }
 }

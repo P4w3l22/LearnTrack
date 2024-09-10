@@ -11,22 +11,12 @@ public partial class CalendarPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = CalendarViewModel;
+
+		Month_Button.Text = Month_Picker.SelectedItem.ToString();
 	}
 
-	private void Note_Clicked(object sender, EventArgs e)
+	private void Month_Picker_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		Button button = (Button)sender;
-		NoteModel note = CalendarViewModel.GetNoteByTitle(button.Text);
-		if (button is not null)
-		{
-			DisplayAlert(note.Title, note.Description, "Ok");
-		}
-	}
-
-	private void CalendarCard_Clicked(object sender, EventArgs e)
-	{
-		Button button = (Button)sender;
-		string day = button.Text.Length == 2 ? button.Text : ("0" + button.Text);
-		CalendarViewModel.ActualDate = $"{day}." + DateTime.Now.ToString("MM.yyyy");
+		Month_Button.Text = Month_Picker.SelectedItem.ToString();
 	}
 }
