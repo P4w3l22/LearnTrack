@@ -2,20 +2,20 @@ using CommunityToolkit.Maui.Views;
 using LearnTrack.MVVM.Models;
 using LearnTrack.MVVM.ViewModels;
 using LearnTrack.MVVM.Views.Popups;
+using LearnTrack.Services;
 using Syncfusion.Maui.Core.Carousel;
 
 namespace LearnTrack.Pages;
 
 public partial class CalendarPage : ContentPage
 {
-	CalendarViewModel viewModel = new();
+	CalendarViewModel viewModel;
 
 	public CalendarPage()
 	{
 		InitializeComponent();
+		viewModel = new();
 		BindingContext = viewModel;
-
-		//Month_Button.Text = Month_Picker.SelectedItem.ToString();
 	}
 
 	private void Month_Picker_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,6 +46,6 @@ public partial class CalendarPage : ContentPage
 	private void DailyNoteCompletedChange_CheckedChanged(object sender, CheckedChangedEventArgs e)
 	{
 		CheckBox checkBox = (CheckBox)sender;
-		viewModel.UpdateDailyNote();
+		viewModel.UpdateDailyNotes();
 	}
 }

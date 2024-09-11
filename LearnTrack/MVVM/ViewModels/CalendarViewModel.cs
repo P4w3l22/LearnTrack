@@ -1,4 +1,5 @@
 ﻿using LearnTrack.MVVM.Models;
+using LearnTrack.Services;
 using Newtonsoft.Json.Bson;
 using PropertyChanged;
 using System.Windows.Input;
@@ -46,26 +47,23 @@ public class CalendarViewModel
 	public ICommand DecrementSelectedMonthCommand =>
 		new Command(() => DecrementSelectedMonth());
     public ICommand UpsertDailyNoteCommand =>
-        new Command(() => UpsertDailyNote());
+        new Command(() => InsertDailyNote());
 	public ICommand DeleteDailyNoteCommand =>
 	new Command<object>((id) => DeleteDailyNote(id));
 
+    private ICalendarService _calendarService;
 
 
 	public CalendarViewModel()
     {
+        _calendarService = new CalendarService();
+
         SetDefaultCurrentDate();
         SetCalendarCards();
         SetCurrentDailyNotes();
-		SelectedMonthName = MonthNames[SelectedMonth - 1];
-
+        SetSelectedMonthName();
+		
 	}
-
-	private void SetCurrentDailyNotes()
-    {
-        NewDailyNote = new() { Date = new DateTime(SelectedYear, SelectedMonth, SelectedDay) };
-		CurrentDailyNotes = App.DailyNoteRepository.GetItems().Where(x => x.Date.ToString("dd.MM.yyyy") == SelectedDate).ToList();
-    }
 
     private void SetDefaultCurrentDate()
     {
@@ -74,6 +72,25 @@ public class CalendarViewModel
 		SelectedMonth = DateTime.Now.Month;
 		SelectedYear = DateTime.Now.Year;
     }
+
+	private void SetCalendarCards()
+	{
+        CalendarCards = _calendarService.GetCalendarCards(SelectedYear, SelectedMonth);
+	}
+	private void SetCurrentDailyNotes()
+    {
+        NewDailyNote = new() 
+        { 
+            Date = new DateTime(SelectedYear, SelectedMonth, SelectedDay) 
+        };
+        
+        CurrentDailyNotes = _calendarService.GetDailyNotes(SelectedDate);
+    }
+
+    private void SetSelectedMonthName()
+    {
+		SelectedMonthName = MonthNames[SelectedMonth - 1];
+	}
 
     private void ChangeSelectedDay(object day)
 	{
@@ -94,7 +111,7 @@ public class CalendarViewModel
             SelectedMonth++;
         }
 		SetCalendarCards();
-		SelectedMonthName = MonthNames[SelectedMonth - 1];
+		SetSelectedMonthName();
 	}
 
 	private void DecrementSelectedMonth()
@@ -109,79 +126,29 @@ public class CalendarViewModel
             SelectedMonth--;
         }
 		SetCalendarCards();
-		SelectedMonthName = MonthNames[SelectedMonth - 1];
+		SetSelectedMonthName();
 	}
 
-    private void DeleteDailyNote(object id)
-    {
-        App.DailyNoteRepository.DeleteItem(CurrentDailyNotes.FirstOrDefault(x => x.Id == (int)id));
-		SetCurrentDailyNotes();
-	}
-
-
-	public void UpdateDailyNote()
-    {
-        foreach (DailyNote dailyNote in CurrentDailyNotes)
-        {
-            App.DailyNoteRepository.UpsertItemWithChildren(dailyNote);
-        }
-	}
-
-    private void UpsertDailyNote()
+    private void InsertDailyNote()
     {
         App.DailyNoteRepository.UpsertItemWithChildren(NewDailyNote);
         SetCurrentDailyNotes();
 	}
 
-	private void SetCalendarCards()
-	{
-		int daysInMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth);
-        int daysInPrevMonth;
-
-		if (SelectedMonth == 1)
+	public void UpdateDailyNotes()
+    {
+        foreach (DailyNote dailyNote in CurrentDailyNotes)
         {
-			daysInPrevMonth = DateTime.DaysInMonth(SelectedYear - 1, 12);
+			_calendarService.UpsertDailyNote(dailyNote);
 		}
-        else
-        {
-            daysInPrevMonth = DateTime.DaysInMonth(SelectedYear, SelectedMonth - 1);
-        }
-        
-		Random random = new();
-        CalendarCards = new();
-
-        int dayOfWeekAt1 = (int)new DateTime(SelectedYear, SelectedMonth, 1).DayOfWeek;
-        if (dayOfWeekAt1 == 0)
-        {
-            dayOfWeekAt1 = 6;
-        }
-        else
-        {
-            dayOfWeekAt1--;
-        }
-
-		for (int i = 1; i <= dayOfWeekAt1; i++)
-		{
-			CalendarCards.Add(new CalendarCardModel()
-			{
-				DayNumber = i + daysInPrevMonth - dayOfWeekAt1,
-				NotesNumber = random.Next(0, 4),
-				ColumnId = (i - 1) % 7,
-				RowId = (i - 1) / 7,
-				IsCurrentMonth = false
-			});
-		}
-
-		for (int i = 1; i <= daysInMonth; i++)
-		{
-			CalendarCards.Add(new CalendarCardModel()
-			{
-				DayNumber = i,
-				NotesNumber = random.Next(0, 4),
-				ColumnId = (i - 1 + dayOfWeekAt1) % 7,
-				RowId = (i - 1 + dayOfWeekAt1) / 7,
-				IsCurrentMonth = true
-			});
-		}
+        //SetTasksStatusPerDate(SelectedDate);
+        //SetCalendarCards();
 	}
+
+    private void DeleteDailyNote(object id)
+    {
+        _calendarService.DeleteDailyNote((int)id, CurrentDailyNotes);
+		SetCurrentDailyNotes();
+	}
+
 }

@@ -32,19 +32,22 @@
                 <VerticalStackLayout Spacing="10">
                     <Button
                         Padding="0"
-                        BackgroundColor="{StaticResource PrimaryColor}"
+                        BackgroundColor="#481B6B"
+                        BorderColor="{StaticResource PrimaryColor}"
+                        BorderWidth="2"
                         Clicked="CalendarPage_Clicked"
                         CornerRadius="50"
                         FontFamily="Icons"
-                        FontSize="20"
+                        FontSize="17"
                         HeightRequest="30"
                         Opacity="10"
                         Text="&#xF274;"
-                        TextColor="Black"
+                        TextColor="White"
                         WidthRequest="30" />
                     <Button
                         Padding="0"
                         BackgroundColor="#481B6B"
+                        BorderColor="{StaticResource PrimaryColor}"
                         BorderWidth="2"
                         Clicked="LearnTrack_Clicked"
                         CornerRadius="50"

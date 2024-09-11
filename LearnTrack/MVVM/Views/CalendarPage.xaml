@@ -241,7 +241,7 @@
                                 <Label
                                     Grid.Row="2"
                                     HorizontalOptions="Center"
-                                    Text="{Binding NotesNumber}"
+                                    Text="{Binding TasksStatus}"
                                     VerticalOptions="End" />
                             </Grid>
                         </Frame>

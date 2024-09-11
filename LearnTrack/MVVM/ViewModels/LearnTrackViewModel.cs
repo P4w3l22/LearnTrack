@@ -122,7 +122,14 @@ public class LearnTrackViewModel
 		App.SubjectRepository.DeleteItem(CurrentSubject);
         Refresh(true);
 		SetCurrentSubject(Subjects[Subjects.Count - 1].Id);
-		SetCurrentTopic(CurrentSubject.Topics[CurrentSubject.Topics.Count - 1].Id);
+        if (CurrentSubject.Topics.Count > 0)
+        {
+            SetCurrentTopic(CurrentSubject.Topics[0].Id);
+		}
+        else
+        {
+            CurrentTopic = new() { Name = "" };
+        }
 	}
 
 	private void DeleteTopic()

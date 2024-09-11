@@ -1,11 +1,13 @@
-﻿
+﻿using Microcharts;
 using LearnTrack.MVVM.Views;
+using SkiaSharp;
+using Microcharts.Maui;
+using LearnTrack.Services;
 
 namespace LearnTrack.Pages;
 
 public partial class MainPage : ContentPage
 {
-
 	public MainPage()
 	{
 		InitializeComponent();
