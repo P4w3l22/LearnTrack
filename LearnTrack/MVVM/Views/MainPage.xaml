@@ -102,7 +102,7 @@
                     BorderColor="{StaticResource BackgroundBlackColor}"
                     HeightRequest="260"
                     MinimumWidthRequest="600">
-                    <VerticalStackLayout>
+                    <VerticalStackLayout Spacing="40">
                         <HorizontalStackLayout Spacing="15">
                             <Button
                                 Padding="0"
@@ -119,99 +119,33 @@
                                 WidthRequest="30" />
                             <Label Text="Aktywność (ostatnie 7 dni)" VerticalOptions="Center" />
                         </HorizontalStackLayout>
-                        <Grid
-                            Margin="0,30,0,30"
-                            Padding="10"
-                            ColumnDefinitions="30,30,30,30,30,30,30"
-                            HorizontalOptions="Center"
-                            RowDefinitions="30,30"
-                            VerticalOptions="Start">
-                            <Label
-                                Grid.Column="0"
-                                HorizontalTextAlignment="Center"
-                                Text="Pon" />
-                            <Label
-                                Grid.Column="1"
-                                HorizontalTextAlignment="Center"
-                                Text="Wt" />
-                            <Label
-                                Grid.Column="2"
-                                HorizontalTextAlignment="Center"
-                                Text="Śr" />
-                            <Label
-                                Grid.Column="3"
-                                HorizontalTextAlignment="Center"
-                                Text="Czw" />
-                            <Label
-                                Grid.Column="4"
-                                HorizontalTextAlignment="Center"
-                                Text="Pt" />
-                            <Label
-                                Grid.Column="5"
-                                HorizontalTextAlignment="Center"
-                                Text="Sob" />
-                            <Label
-                                Grid.Column="6"
-                                HorizontalTextAlignment="Center"
-                                Text="Nie" />
-                            <Frame
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                BackgroundColor="{StaticResource PrimaryColor}"
-                                BorderColor="{StaticResource PrimaryColor}"
-                                CornerRadius="3"
-                                HeightRequest="20"
-                                WidthRequest="20" />
-                            <Frame
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                BorderColor="{StaticResource PrimaryColor}"
-                                CornerRadius="3"
-                                HeightRequest="20"
-                                WidthRequest="20" />
-                            <Frame
-                                Grid.Row="1"
-                                Grid.Column="2"
-                                BackgroundColor="{StaticResource PrimaryColor}"
-                                BorderColor="{StaticResource PrimaryColor}"
-                                CornerRadius="3"
-                                HeightRequest="20"
-                                WidthRequest="20" />
-                            <Frame
-                                Grid.Row="1"
-                                Grid.Column="3"
-                                BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                BorderColor="{StaticResource PrimaryColor}"
-                                CornerRadius="3"
-                                HeightRequest="20"
-                                WidthRequest="20" />
-                            <Frame
-                                Grid.Row="1"
-                                Grid.Column="4"
-                                BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                BorderColor="{StaticResource PrimaryColor}"
-                                CornerRadius="3"
-                                HeightRequest="20"
-                                WidthRequest="20" />
-                            <Frame
-                                Grid.Row="1"
-                                Grid.Column="5"
-                                BackgroundColor="{StaticResource PrimaryColor}"
-                                BorderColor="{StaticResource PrimaryColor}"
-                                CornerRadius="3"
-                                HeightRequest="20"
-                                WidthRequest="20" />
-                            <Frame
-                                Grid.Row="1"
-                                Grid.Column="6"
-                                BackgroundColor="{StaticResource PrimaryColor}"
-                                BorderColor="{StaticResource PrimaryColor}"
-                                CornerRadius="3"
-                                HeightRequest="20"
-                                WidthRequest="20" />
-
-                        </Grid>
+                        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <CollectionView ItemsSource="{Binding Last7DaysActivity}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout HorizontalItemSpacing="0" Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame
+                                            BackgroundColor="{StaticResource PrimaryColor}"
+                                            BorderColor="{StaticResource PrimaryColor}"
+                                            CornerRadius="3"
+                                            HeightRequest="20"
+                                            WidthRequest="20">
+                                            <Frame.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding .}"
+                                                    TargetType="Frame"
+                                                    Value="False">
+                                                    <Setter Property="BackgroundColor" Value="{StaticResource BackgroundBlackColor}" />
+                                                </DataTrigger>
+                                            </Frame.Triggers>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </HorizontalStackLayout>
+                        <!--</Grid>-->
                     </VerticalStackLayout>
                 </Frame>
                 <!--#endregion-->
@@ -250,93 +184,43 @@
                                     VerticalTextAlignment="Center" />
                             </HorizontalStackLayout>
 
-                            <Grid
-                                Margin="0,20,0,0"
-                                ColumnDefinitions=".2*,.6*,.2*"
-                                RowDefinitions="*,*,*,*">
-                                <Frame
-                                    Grid.Column="1"
-                                    Margin="0,0,0,10"
-                                    Padding="0"
-                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                    BorderColor="{StaticResource PrimaryColor}"
-                                    CornerRadius="20">
-                                    <Grid ColumnDefinitions=".8*,.2*">
-                                        <Button
-                                            Grid.Column="0"
-                                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                            Clicked="Button_Clicked"
-                                            CornerRadius="20"
-                                            FontSize="25"
-                                            HeightRequest="60"
-                                            HorizontalOptions="Start"
-                                            Text="C#"
-                                            TextColor="{StaticResource PrimaryColor}" />
-                                        <Label
-                                            HorizontalOptions="End"
-                                            Text="30.08.2024"
-                                            TextColor="{StaticResource SecondaryGrayColor}"
-                                            VerticalOptions="Center" />
-                                    </Grid>
-                                </Frame>
+                            <VerticalStackLayout Spacing="10">
 
-                                <Frame
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Margin="0,0,0,10"
-                                    Padding="0"
-                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                    BorderColor="{StaticResource PrimaryColor}"
-                                    CornerRadius="20">
-                                    <Grid ColumnDefinitions=".8*,.2*">
+                                <CollectionView ItemsSource="{Binding LatestSubjectsName}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame
+                                                Margin="0,0,0,10"
+                                                Padding="0"
+                                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                                BorderColor="{StaticResource PrimaryColor}"
+                                                CornerRadius="20">
+                                                <Grid ColumnDefinitions=".8*,.2*">
+                                                    <Button
+                                                        Grid.Column="0"
+                                                        BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                                        Clicked="Button_Clicked"
+                                                        CornerRadius="20"
+                                                        FontSize="25"
+                                                        HeightRequest="60"
+                                                        HorizontalOptions="Start"
+                                                        Text="{Binding .}"
+                                                        TextColor="{StaticResource PrimaryColor}" />
+                                                    <!--<Label
+                                                        HorizontalOptions="End"
+                                                        Text="30.08.2024"
+                                                        TextColor="{StaticResource SecondaryGrayColor}"
+                                                        VerticalOptions="Center" />-->
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
 
-                                        <Button
-                                            Grid.Column="0"
-                                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                            Clicked="Button_Clicked"
-                                            CornerRadius="20"
-                                            FontSize="25"
-                                            HeightRequest="60"
-                                            HorizontalOptions="Start"
-                                            Text="SQL"
-                                            TextColor="{StaticResource PrimaryColor}" />
-                                        <Label
-                                            Margin="30,0,0,0"
-                                            HorizontalOptions="End"
-                                            Text="14.08.2024"
-                                            TextColor="{StaticResource SecondaryGrayColor}"
-                                            VerticalOptions="Center" />
-                                    </Grid>
-                                </Frame>
-
-                                <Frame
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Margin="0,0,0,10"
-                                    Padding="0"
-                                    BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                    BorderColor="{StaticResource PrimaryColor}"
-                                    CornerRadius="20">
-                                    <Grid ColumnDefinitions=".8*,.2*">
-                                        <Button
-                                            BackgroundColor="{StaticResource BackgroundBlackColor}"
-                                            Clicked="Button_Clicked"
-                                            CornerRadius="20"
-                                            FontSize="25"
-                                            HeightRequest="60"
-                                            HorizontalOptions="Start"
-                                            Text=".NET"
-                                            TextColor="{StaticResource PrimaryColor}" />
-                                        <Label
-                                            Margin="30,0,0,0"
-                                            HorizontalOptions="End"
-                                            Text="14.08.2024"
-                                            TextColor="{StaticResource SecondaryGrayColor}"
-                                            VerticalOptions="Center" />
-                                    </Grid>
-                                </Frame>
-
-                            </Grid>
+                            </VerticalStackLayout>
 
                         </VerticalStackLayout>
                     </ScrollView>

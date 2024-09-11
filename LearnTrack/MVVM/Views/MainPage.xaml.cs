@@ -3,14 +3,19 @@ using LearnTrack.MVVM.Views;
 using SkiaSharp;
 using Microcharts.Maui;
 using LearnTrack.Services;
+using LearnTrack.MVVM.ViewModels;
 
 namespace LearnTrack.Pages;
 
 public partial class MainPage : ContentPage
 {
+	MainPageViewModel viewModel;
+
 	public MainPage()
 	{
 		InitializeComponent();
+		viewModel = new();
+		BindingContext = viewModel;
 	}
 
 	private void Button_Clicked(object sender, EventArgs e)

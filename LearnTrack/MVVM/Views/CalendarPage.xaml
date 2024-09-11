@@ -3,7 +3,7 @@
     x:Class="LearnTrack.Pages.CalendarPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="CalendarPage"
+    Title=""
     BackgroundColor="{StaticResource BackgroundBlackColor}">
     <Grid ColumnDefinitions="100,.3*,.05*,.5*,.05*" RowDefinitions=".15*,.85*">
 
@@ -250,5 +250,6 @@
             </CollectionView>
         </Grid>
         <!--#endregion-->
+
     </Grid>
 </ContentPage>
