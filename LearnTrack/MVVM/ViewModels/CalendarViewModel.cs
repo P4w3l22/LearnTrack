@@ -28,11 +28,6 @@ public class CalendarViewModel
     };
     public string SelectedMonthName {  get; set; }
 
-	public int DaysInSelectedMonth
-    {
-        get =>
-            DateTime.DaysInMonth(SelectedYear, SelectedMonth);
-    }
     public int SelectedDay { get; set; }
     public int SelectedMonth { get; set; }
     public int SelectedYear { get; set; }
@@ -51,12 +46,12 @@ public class CalendarViewModel
 	public ICommand DeleteDailyNoteCommand =>
 	new Command<object>((id) => DeleteDailyNote(id));
 
-    private ICalendarService _calendarService;
+    private readonly ICalendarService _calendarService;
 
 
-	public CalendarViewModel()
+	public CalendarViewModel(ICalendarService calendarService)
     {
-        _calendarService = new CalendarService();
+        _calendarService = calendarService;
 
         SetDefaultCurrentDate();
         SetCalendarCards();

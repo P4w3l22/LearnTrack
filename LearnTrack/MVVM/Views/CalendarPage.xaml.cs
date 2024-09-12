@@ -9,29 +9,19 @@ namespace LearnTrack.Pages;
 
 public partial class CalendarPage : ContentPage
 {
-	CalendarViewModel viewModel;
+	CalendarViewModel _viewModel;
 
-	public CalendarPage()
+	public CalendarPage(CalendarViewModel viewModel)
 	{
 		InitializeComponent();
-		viewModel = new();
-		BindingContext = viewModel;
-	}
-
-	private void Month_Picker_SelectedIndexChanged(object sender, EventArgs e)
-	{
-		//if (Month_Picker.SelectedItem is null)
-		//{
-		//	Month_Picker.SelectedIndex = DateTime.Now.Month - 1;
-		//	Month_Picker.SelectedItem = Month_Picker.SelectedIndex;
-		//}
-		//Month_Button.Text = Month_Picker.SelectedItem.ToString();
+		_viewModel = viewModel;
+		BindingContext = _viewModel;
 	}
 
 	private void Note_Clicked(object sender, EventArgs e)
 	{
 		Button button = (Button)sender;
-		DailyNote note = viewModel.CurrentDailyNotes.FirstOrDefault(x => x.Title == button.Text);
+		DailyNote note = _viewModel.CurrentDailyNotes.FirstOrDefault(x => x.Title == button.Text);
 		if (button is not null)
 		{
 			DisplayAlert(note.Title, note.Content, "Ok");
@@ -40,12 +30,12 @@ public partial class CalendarPage : ContentPage
 
 	private void AddNewDailyNote_Clicked(object sender, EventArgs e)
 	{
-		this.ShowPopup(new InsertDailyNotePopupPage(viewModel));
+		this.ShowPopup(new InsertDailyNotePopupPage(_viewModel));
 	}
 
 	private void DailyNoteCompletedChange_CheckedChanged(object sender, CheckedChangedEventArgs e)
 	{
 		CheckBox checkBox = (CheckBox)sender;
-		viewModel.UpdateDailyNotes();
+		_viewModel.UpdateDailyNotes();
 	}
 }

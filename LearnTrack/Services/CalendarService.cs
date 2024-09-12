@@ -1,4 +1,5 @@
 ﻿using LearnTrack.MVVM.Models;
+using LearnTrack.Repositories.IRepository;
 
 namespace LearnTrack.Services;
 
@@ -6,24 +7,25 @@ public class CalendarService : ICalendarService
 {
 	private List<CalendarCardModel> CalendarCards { get; set; }
 	private Dictionary<string, int[]> DailyNotesStatusPerDay { get; set; }
+	private readonly IBaseRepository<DailyNote> _dailyNoteRepository;
 
-	public CalendarService()
+	public CalendarService(IBaseRepository<DailyNote> dailyNoteRepository)
 	{
+		_dailyNoteRepository = dailyNoteRepository;
 	}
 
 	public List<DailyNote> GetDailyNotes(string selectedDate) =>
-		App.DailyNoteRepository.GetItems().Where(x => x.Date.ToString("dd.MM.yyyy") == selectedDate).ToList();
+		_dailyNoteRepository.GetItems().Where(x => x.Date.ToString("dd.MM.yyyy") == selectedDate).ToList();
 
 	public void UpsertDailyNote(DailyNote dailyNote)
 	{
-		App.DailyNoteRepository.UpsertItemWithChildren(dailyNote);
+		_dailyNoteRepository.UpsertItemWithChildren(dailyNote);
 	}
 
 	public void DeleteDailyNote(int id, List<DailyNote> currentDailyNotes)
 	{
-		App.DailyNoteRepository.DeleteItem(currentDailyNotes.FirstOrDefault(x => x.Id == (int)id));
+		_dailyNoteRepository.DeleteItem(currentDailyNotes.FirstOrDefault(x => x.Id == (int)id));
 	}
-
 
 	public List<CalendarCardModel> GetCalendarCards(int selectedYear, int selectedMonth)
 	{
@@ -82,7 +84,7 @@ public class CalendarService : ICalendarService
 	private void SetTasksStatusPerDate()
 	{
 		List<DailyNote> notes = new();
-		notes = App.DailyNoteRepository.GetItems();
+		notes = _dailyNoteRepository.GetItems();
 		DailyNotesStatusPerDay = new();
 		foreach (DailyNote note in notes)
 		{

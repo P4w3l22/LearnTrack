@@ -9,10 +9,25 @@ namespace LearnTrack.Pages;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage(MainPageViewModel viewModel)
+	CalendarViewModel _calendarViewModel;
+
+	public MainPage(MainPageViewModel viewModel, CalendarViewModel calendarViewModel)
 	{
 		InitializeComponent();
+		_calendarViewModel = calendarViewModel;
 		BindingContext = viewModel;
+
+		chartView.Chart = new BarChart
+		{
+			Entries = viewModel.Entries,
+			BackgroundColor = SKColor.Parse("#202020"),
+		};
+	
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
 	}
 
 	private void Button_Clicked(object sender, EventArgs e)
@@ -22,17 +37,12 @@ public partial class MainPage : ContentPage
 
 	private void CalendarPage_Clicked(object sender, EventArgs e)
 	{
-		Navigation.PushAsync(new CalendarPage());
+		Navigation.PushAsync(new CalendarPage(_calendarViewModel));
 	}
 
 	private void LearnTrack_Clicked(object sender, EventArgs e)
 	{
 		Navigation.PushAsync(new LearnTrackPage());
     }
-
-	private void GetSubjects()
-	{
-
-	}
 
 }

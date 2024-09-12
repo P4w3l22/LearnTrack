@@ -16,7 +16,7 @@ public partial class App : Application
 
 	public App(IBaseRepository<Subject> subjectRepository, IBaseRepository<Topic> topicRepository,
 			   IBaseRepository<TopicNote> topicNoteRepository, IBaseRepository<DailyNote> dailyNoteRepository,
-			   MainPageViewModel mainPageViewModel)
+			   MainPageViewModel mainPageViewModel, CalendarViewModel calendarViewModel)
 	{
 		InitializeComponent();
 
@@ -25,6 +25,6 @@ public partial class App : Application
 		TopicNoteRepository = topicNoteRepository;
 		DailyNoteRepository = dailyNoteRepository;
 
-		MainPage = new NavigationPage(new MainPage(mainPageViewModel));
+		MainPage = new NavigationPage(new MainPage(mainPageViewModel, calendarViewModel));
 	}
 }

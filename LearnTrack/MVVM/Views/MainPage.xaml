@@ -3,6 +3,7 @@
     x:Class="LearnTrack.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:micro="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
     BackgroundColor="{StaticResource BackgroundBlackColor}">
 
     <Grid ColumnDefinitions="100,1,*">
@@ -179,7 +180,7 @@
                                     VerticalOptions="Center"
                                     WidthRequest="30" />
                                 <Label
-                                    Text="Ostatnio przerabiane tematy"
+                                    Text="Ostatnio przerabiane przedmioty"
                                     VerticalOptions="Center"
                                     VerticalTextAlignment="Center" />
                             </HorizontalStackLayout>
@@ -228,12 +229,39 @@
                 <!--#endregion-->
 
                 <!--#region ChartPanel-->
-                <Label
-                    HeightRequest="500"
-                    HorizontalOptions="Center"
-                    MinimumWidthRequest="600"
-                    Text="Wykresy =&gt; Liczba dodanych notatek ; liczba dodanych tematów"
-                    VerticalOptions="Center" />
+                <Frame
+                    Margin="0,30,0,0"
+                    BackgroundColor="{StaticResource BackgroundBlackColor}"
+                    BorderColor="{StaticResource BackgroundBlackColor}"
+                    HeightRequest="600"
+                    MinimumWidthRequest="600">
+                    <VerticalStackLayout Padding="10" Spacing="15">
+                        <HorizontalStackLayout Margin="0,0,0,0">
+                            <Button
+                                Margin="0,0,15,0"
+                                Padding="0"
+                                BackgroundColor="{StaticResource BackgroundBlackColor}"
+                                BorderWidth="2"
+                                Clicked="LearnTrack_Clicked"
+                                CornerRadius="50"
+                                FontFamily="Icons"
+                                FontSize="20"
+                                HeightRequest="30"
+                                Text="&#xF0EB;"
+                                TextColor="{StaticResource PrimaryColor}"
+                                VerticalOptions="Center"
+                                WidthRequest="30" />
+                            <Label
+                                Text="Ilość tematów na przedmiot"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center" />
+                        </HorizontalStackLayout>
+                        <micro:ChartView
+                            x:Name="chartView"
+                            HeightRequest="500"
+                            WidthRequest="400" />
+                    </VerticalStackLayout>
+                </Frame>
                 <!--#endregion-->
             </FlexLayout>
         </ScrollView>

@@ -22,6 +22,9 @@ public class StatisticsService : IStatisticsService
 		_topicNoteRepository = topicNoteRepository;
 	}
 
+	public List<Subject> GetSubjectsTopicsCount() =>
+		_subjectRepository.GetItemsWithChildren().OrderByDescending(x => x.Topics.Count).ToList();
+	
 
 	public List<string> GetLatesSubjects()
 	{
