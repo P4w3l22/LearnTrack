@@ -9,12 +9,9 @@ namespace LearnTrack.Pages;
 
 public partial class MainPage : ContentPage
 {
-	MainPageViewModel viewModel;
-
-	public MainPage()
+	public MainPage(MainPageViewModel viewModel)
 	{
 		InitializeComponent();
-		viewModel = new();
 		BindingContext = viewModel;
 	}
 

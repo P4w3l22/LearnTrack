@@ -1,4 +1,5 @@
 ﻿using LearnTrack.MVVM.Models;
+using LearnTrack.MVVM.ViewModels;
 using LearnTrack.Pages;
 using LearnTrack.Repositories;
 using LearnTrack.Repositories.IRepository;
@@ -14,7 +15,8 @@ public partial class App : Application
 	public static IBaseRepository<DailyNote> DailyNoteRepository { get; set; }
 
 	public App(IBaseRepository<Subject> subjectRepository, IBaseRepository<Topic> topicRepository,
-			   IBaseRepository<TopicNote> topicNoteRepository, IBaseRepository<DailyNote> dailyNoteRepository)
+			   IBaseRepository<TopicNote> topicNoteRepository, IBaseRepository<DailyNote> dailyNoteRepository,
+			   MainPageViewModel mainPageViewModel)
 	{
 		InitializeComponent();
 
@@ -23,6 +25,6 @@ public partial class App : Application
 		TopicNoteRepository = topicNoteRepository;
 		DailyNoteRepository = dailyNoteRepository;
 
-		MainPage = new NavigationPage(new MainPage());
+		MainPage = new NavigationPage(new MainPage(mainPageViewModel));
 	}
 }

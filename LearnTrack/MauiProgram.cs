@@ -4,6 +4,7 @@ using LearnTrack.Repositories.IRepository;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using LearnTrack.Services;
+using LearnTrack.MVVM.ViewModels;
 
 namespace LearnTrack
 {
@@ -26,7 +27,10 @@ namespace LearnTrack
             builder.Services.AddSingleton<IBaseRepository<DailyNote>, BaseRepository<DailyNote>>();
 
             builder.Services.AddSingleton<ICalendarService, CalendarService>();
+            builder.Services.AddSingleton<IStatisticsService, StatisticsService>();
 #if DEBUG
+            builder.Services.AddTransient<MainPageViewModel>();
+
             builder.Logging.AddDebug();
 #endif
             return builder.Build();
