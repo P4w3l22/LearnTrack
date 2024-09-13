@@ -20,9 +20,9 @@ public class LearnTrackViewModel
     public ICommand ChangeSubjectCommand =>
 		new Command<object>((id) => ChangeCurrentSubject(id));
 	public ICommand ChangeTopicCommand =>
-		new Command<object>((id) => SetCurrentTopic(id));
+		new Command<object>((id) => ChangeCurrentTopic(id));
     public ICommand ChangeTopicNoteCommand =>
-        new Command<object>((id) => SetCurrentTopicNote(id));
+        new Command<object>((id) => ChangeCurrentTopicNote(id));
     public ICommand UpsertSubjectCommand =>
         new Command(() => UpsertSubject());
     public ICommand UpsertTopicCommand =>
@@ -41,9 +41,10 @@ public class LearnTrackViewModel
     
     public LearnTrackViewModel()
     {
-        SetSubjects();
-        SetCurrentSubject(Subjects[0].Id);
-        SetCurrentTopic(CurrentSubject.Topics[0].Id);
+        // zamienić na refresh
+            SetSubjects();
+            SetCurrentSubject(Subjects[0].Id);
+		    ChangeCurrentTopic(CurrentSubject.Topics[0].Id);
         NewTopic = new();
         NewSubject = new();
 	}
@@ -54,7 +55,7 @@ public class LearnTrackViewModel
 		SetCurrentSubject(id);
         if (CurrentSubject.Topics.Count > 0)
         {
-            SetCurrentTopic(CurrentSubject.Topics[0].Id);
+			ChangeCurrentTopic(CurrentSubject.Topics[0].Id);
         }
         else
         {
@@ -65,16 +66,9 @@ public class LearnTrackViewModel
         }
 	}
 
-	private void SetCurrentTopic(object id)
-	{
-		CurrentTopic = CurrentSubject.Topics.FirstOrDefault(x => x.Id == (int)id);
-	}
-
-	private void SetCurrentTopicNote(object id)
-    {
+	private void ChangeCurrentTopicNote(object id) =>
         CurrentTopicNote = CurrentTopic.TopicNotes.FirstOrDefault(x => x.Id == (int)id);
-    }
-
+    
 	private void UpsertSubject()
 	{
 		if (NewSubject.Name is null || NewSubject.Name.Length == 0)
@@ -124,7 +118,7 @@ public class LearnTrackViewModel
 		SetCurrentSubject(Subjects[Subjects.Count - 1].Id);
         if (CurrentSubject.Topics.Count > 0)
         {
-            SetCurrentTopic(CurrentSubject.Topics[0].Id);
+			ChangeCurrentTopic(CurrentSubject.Topics[0].Id);
 		}
         else
         {
@@ -138,7 +132,7 @@ public class LearnTrackViewModel
 		Refresh();
         if (CurrentSubject.Topics.Count() > 0)
         {
-            SetCurrentTopic(CurrentSubject.Topics[CurrentSubject.Topics.Count() - 1].Id);
+			ChangeCurrentTopic(CurrentSubject.Topics[CurrentSubject.Topics.Count() - 1].Id);
         }
         else
         {
@@ -159,9 +153,6 @@ public class LearnTrackViewModel
         NewTopic = CurrentTopic;
     }
 
-
-
-
     private void SaveCurrentTopicNote()
     {
         App.TopicNoteRepository.UpsertItemWithChildren(CurrentTopicNote);
@@ -176,7 +167,9 @@ public class LearnTrackViewModel
     {
         App.SubjectRepository.UpsertItemWithChildren(NewSubject);
     }
+    
 
+    // Wyodrębnić do serwisu
     // TODO: refaktoryzacja refresh
 	private void Refresh(bool defaultValues = false, bool isCreating = false)
     {
@@ -186,28 +179,28 @@ public class LearnTrackViewModel
             if (defaultValues)
             {
 			    SetCurrentSubject(Subjects[0].Id);
-			    SetCurrentTopic(CurrentSubject.Topics[0].Id);
+				ChangeCurrentTopic(CurrentSubject.Topics[0].Id);
 		    }
             else
             {
                 SetCurrentSubject(CurrentSubject.Id);
-                SetCurrentTopic(CurrentTopic.Id);
+				ChangeCurrentTopic(CurrentTopic.Id);
             }
         }
         else
         {
             CurrentTopic = new() { Name = "" };
         }
-        
     }
     
-	private void SetCurrentSubject(object id)
-	{
-		CurrentSubject = Subjects.FirstOrDefault(x => x.Id == (int)id);
-	}
-    
+	private void SetCurrentSubject(object id) => 
+        CurrentSubject = Subjects.FirstOrDefault(x => x.Id == (int)id);
 
-    // Wyodrębnić do serwisu
+    private void ChangeCurrentTopic(object id)
+	{
+		CurrentTopic = CurrentSubject.Topics.FirstOrDefault(x => x.Id == (int)id);
+	}
+
     private void SetSubjects()
     {
 		Subjects = App.SubjectRepository.GetItemsWithChildren();
@@ -216,7 +209,7 @@ public class LearnTrackViewModel
 			Subjects = new();
         }
         SetTopicNotes();
-    }
+    }	
     private void SetTopicNotes()
     {
         var topicNotes = App.TopicNoteRepository.GetItems();

@@ -24,7 +24,7 @@ public class MainPageViewModel
 		SetEntries();
 	}
 
-	private void SetEntries()
+	public void SetEntries()
 	{
 		List<Subject> subjectsTopicsCount = _statisticsService.GetSubjectsTopicsCount();
 		Entries = new ChartEntry[subjectsTopicsCount.Count];

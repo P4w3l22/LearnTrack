@@ -155,7 +155,7 @@
                 <Frame
                     Grid.Row="1"
                     Grid.Column="0"
-                    Margin="30"
+                    Margin="0"
                     BackgroundColor="{StaticResource BackgroundBlackColor}"
                     BorderColor="{StaticResource SecondaryGrayColor}"
                     CornerRadius="40"

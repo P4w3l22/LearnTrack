@@ -1,33 +1,40 @@
-﻿using Microcharts;
+﻿using LearnTrack.MVVM.ViewModels;
 using LearnTrack.MVVM.Views;
+using Microcharts;
 using SkiaSharp;
-using Microcharts.Maui;
-using LearnTrack.Services;
-using LearnTrack.MVVM.ViewModels;
 
 namespace LearnTrack.Pages;
 
 public partial class MainPage : ContentPage
 {
 	CalendarViewModel _calendarViewModel;
+	MainPageViewModel _viewModel;
 
 	public MainPage(MainPageViewModel viewModel, CalendarViewModel calendarViewModel)
 	{
 		InitializeComponent();
 		_calendarViewModel = calendarViewModel;
-		BindingContext = viewModel;
+		_viewModel = viewModel;
+		BindingContext = _viewModel;
 
-		chartView.Chart = new BarChart
-		{
-			Entries = viewModel.Entries,
-			BackgroundColor = SKColor.Parse("#202020"),
-		};
+		SetCharView();
 	
 	}
 
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
+		_viewModel.SetEntries();
+		SetCharView();
+	}
+
+	private void SetCharView()
+	{
+		chartView.Chart = new BarChart
+		{
+			Entries = _viewModel.Entries,
+			BackgroundColor = SKColor.Parse("#202020"),
+		};
 	}
 
 	private void Button_Clicked(object sender, EventArgs e)
